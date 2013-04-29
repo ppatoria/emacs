@@ -1,0 +1,919 @@
+This is ecb.info, produced by makeinfo version 4.2 from ecb.texi.
+
+INFO-DIR-SECTION GNU Emacs Lisp
+START-INFO-DIR-ENTRY
+* ECB: (ecb).           Emacs Code Browser
+END-INFO-DIR-ENTRY
+
+
+File: ecb.info,  Node: Changing the ECB-layout,  Next: Redrawing the ECB-layout,  Prev: The ECB-layout,  Up: The ECB-layout
+
+Changing and customizing the ECB-layout
+---------------------------------------
+
+ECB offers several predefined layouts with different sets and also different
+locations of ECB-windows. See below the "ascii-screenshot" of all currently
+built-in layouts(1).
+
+In addition to these predefined layouts you can either interactively create
+new layouts "by example" (*note Creating a new ECB-layout::) or program new
+layouts with the macro `ecb-layout-define' (*note The layout-engine::). The
+former method is the recommended one!
+
+There are two ways to interactively change the layout:
+ * Changing permanently: Customize the option `ecb-layout-name' and store it
+   for future Emacs sessions.
+
+ * Switching between several layouts at runtime: If you want to switch fast
+   between a certain sequence of layouts see the option
+   `ecb-toggle-layout-sequence' and the command `ecb-toggle-layout' (*note
+   Simulating speedbar::). For just selecting another layout during current
+   Emacs-session use the command `ecb-change-layout'.
+
+With the option `ecb-show-sources-in-directories-buffer' you can define if
+sources are displayed in the directory-window of a layout (*note ECB
+Directories-buffer::).
+
+In addition to the general layout you can specify if the layout should
+contain a durable compilation-window at the bottom of the frame, see
+`ecb-compile-window-height' (*note Temp- and compile-buffers::).
+
+Maybe you want also change the look&feel of the tree-buffers. Then you can
+change the location of the collapse- and expand-symbols and the indentation
+of sub-nodes in a tree. See `ecb-tree-indent' and
+`ecb-tree-expand-symbol-before'.
+
+Here are all currently available layouts (for creating own new layouts see
+*Note Creating a new ECB-layout::); just customize the option
+`ecb-layout-name' to the related name:
+
+Layout "left1"
+      -------------------------------------------------------
+      |              |                                      |
+      |  Directories |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |--------------|                                      |
+      |      |       |                                      |
+      | Sour | Hist  |                 Edit                 |
+      |      |       |                                      |
+      |      |       |                                      |
+      |--------------|                                      |
+      |              |                                      |
+      |  Methods     |                                      |
+      |              |                                      |
+      |              |                                      |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "left2"
+      -------------------------------------------------------
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |  Directories |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |--------------|                 Edit                 |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |  Sources     |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "left3"
+      -------------------------------------------------------
+      |              |                                      |
+      |  Directories |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |--------------|                                      |
+      |              |                                      |
+      |  Sources     |                 Edit                 |
+      |              |                                      |
+      |              |                                      |
+      |--------------|                                      |
+      |              |                                      |
+      |  Methods     |                                      |
+      |              |                                      |
+      |              |                                      |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "left4"
+      -------------------------------------------------------
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |  Directories |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |--------------|                 Edit                 |
+      |      |       |                                      |
+      |      |       |                                      |
+      |      |       |                                      |
+      | Sour | Hist  |                                      |
+      |      |       |                                      |
+      |      |       |                                      |
+      |      |       |                                      |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "left5"
+      -------------------------------------------------------
+      |              |                                      |
+      |  Directories |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |--------------|                                      |
+      |              |                                      |
+      |  Sources     |                 Edit                 |
+      |              |                                      |
+      |              |                                      |
+      |--------------|                                      |
+      |              |                                      |
+      |  History     |                                      |
+      |              |                                      |
+      |              |                                      |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "right1"
+      -------------------------------------------------------
+      |                                      |              |
+      |                                      |  Directories |
+      |                                      |              |
+      |                                      |              |
+      |                                      |--------------|
+      |                                      |              |
+      |                                      |              |
+      |             Edit                     |  Sources     |
+      |                                      |              |
+      |                                      |              |
+      |                                      |--------------|
+      |                                      |              |
+      |                                      |  Methods     |
+      |                                      |              |
+      |                                      |              |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "left6"
+      -------------------------------------------------------
+      |  Sources     |                                      |
+      |--------------|                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |  Methods     |                 Edit                 |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |--------------|                                      |
+      |  History     |                                      |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "top1"
+      -------------------------------------------------------
+      |                        |             |              |
+      |                        |             |              |
+      |      Directories       |  Sources    |  Methods     |
+      |                        |             |              |
+      |                        |             |              |
+      |-----------------------------------------------------|
+      |                                                     |
+      |                                                     |
+      |                                                     |
+      |                                                     |
+      |                    Edit                             |
+      |                                                     |
+      |                                                     |
+      |                                                     |
+      |                                                     |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "left7"
+      -------------------------------------------------------
+      |              |                                      |
+      |  Directories |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |--------------|                 Edit                 |
+      |              |                                      |
+      |  History     |                                      |
+      |              |                                      |
+      |--------------|                                      |
+      |              |                                      |
+      |  Methods     |                                      |
+      |              |                                      |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "left8"
+      -------------------------------------------------------
+      |              |                                      |
+      |  Directories |                                      |
+      |              |                                      |
+      |--------------|                                      |
+      |              |                                      |
+      |  Sources     |                                      |
+      |              |                                      |
+      |--------------|                 Edit                 |
+      |              |                                      |
+      |  Methods     |                                      |
+      |              |                                      |
+      |              |                                      |
+      |--------------|                                      |
+      |  History     |                                      |
+      |              |                                      |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "top2"
+      -------------------------------------------------------
+      |                                                     |
+      |                                                     |
+      |                    Methods                          |
+      |                                                     |
+      |                                                     |
+      |-----------------------------------------------------|
+      |                                                     |
+      |                                                     |
+      |                                                     |
+      |                                                     |
+      |                    Edit                             |
+      |                                                     |
+      |                                                     |
+      |                                                     |
+      |                                                     |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "left9"
+      -------------------------------------------------------
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |   Methods    |                 Edit                 |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "left10"
+      -------------------------------------------------------
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |  Methods     |                 Edit                 |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |--------------|                                      |
+      |      |       |                                      |
+      | Sou  | Hist  |                                      |
+      |      |       |                                      |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "left11"
+      -------------------------------------------------------
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |  Methods     |                 Edit                 |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |--------------|                                      |
+      |              |                                      |
+      |  History     |                                      |
+      |              |                                      |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "left12"
+      -------------------------------------------------------
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |   History    |                 Edit                 |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "left13"
+      -------------------------------------------------------
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      | Directories  |                 Edit                 |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "left14"
+      -------------------------------------------------------
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      | Directories  |                 Edit                 |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |--------------|                                      |
+      |              |                                      |
+      |  History     |                                      |
+      |              |                                      |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "left15"
+      -------------------------------------------------------
+      |              |                                      |
+      |  Directories |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |--------------|                 Edit                 |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      |  Methods     |                                      |
+      |              |                                      |
+      |              |                                      |
+      |              |                                      |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "leftright1"
+      -------------------------------------------------------
+      |             |                         |             |
+      | Directories |                         |  Methods    |
+      |             |                         |             |
+      |             |                         |             |
+      |             |                         |             |
+      |             |                         |             |
+      |             |                         |             |
+      |-------------|          Edit           |             |
+      |             |                         |             |
+      | Sources     |                         |             |
+      |             |                         |             |
+      |-------------|                         |             |
+      |             |                         |             |
+      | History     |                         |             |
+      |             |                         |             |
+      -------------------------------------------------------
+      |                                                     |
+      |                   Compilation                       |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "leftright2"
+      -------------------------------------------------------
+      |             |                         |             |
+      | Directories |                         |  Methods    |
+      |             |                         |             |
+      |             |                         |             |
+      |             |                         |             |
+      |             |                         |             |
+      |             |                         |             |
+      |             |          Edit           |             |
+      |-------------|                         |-------------|
+      |             |                         |             |
+      | Sources     |                         |  History    |
+      |             |                         |             |
+      |             |                         |             |
+      |             |                         |             |
+      |             |                         |             |
+      -------------------------------------------------------
+      |                                                     |
+      |                   Compilation                       |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "leftright3"
+      -------------------------------------------------------
+      |             |                         |             |
+      | Directories |                         |  Methods    |
+      |             |                         |             |
+      |             |                         |             |
+      |             |                         |             |
+      |             |                         |             |
+      |             |                         |             |
+      |             |          Edit           |             |
+      |             |                         |             |
+      |             |                         |             |
+      |             |                         |             |
+      |             |                         |             |
+      |             |                         |             |
+      |             |                         |             |
+      |             |                         |             |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+Layout "left-dir-plus-speedbar"
+      -------------------------------------------------------
+      |             |                                       |
+      | Directories |                                       |
+      |             |                                       |
+      |             |                                       |
+      |             |                                       |
+      |             |                                       |
+      |             |                                       |
+      |-------------|                                       |
+      |             |                                       |
+      |             |                                       |
+      |             |                                       |
+      | Speedbar    |                                       |
+      |             |                                       |
+      |             |                                       |
+      |             |                                       |
+      -------------------------------------------------------
+      |                                                     |
+      |                    Compilation                      |
+      |                                                     |
+      -------------------------------------------------------
+
+---------- Footnotes ----------
+
+(1) The command `ecb-show-layout-help'' shows the outline-picture for all
+built-in layouts.
+
+
+File: ecb.info,  Node: Redrawing the ECB-layout,  Next: Changing window sizes,  Prev: Changing the ECB-layout,  Up: The ECB-layout
+
+Redrawing the ECB-layout
+------------------------
+
+If you have unintentionally destroyed the ECB-layout, you can always restore
+the layout with calling `ecb-redraw-layout'. This is even true, if you get
+messages like "wrong-type-argument window-live-p #<window 222>".
+
+If the variable `ecb-redraw-layout-quickly' is not nil then the redraw is
+done by the `ecb-redraw-layout-quickly' function, otherwise by
+`ecb-redraw-layout-full'. But it's strongly recommended to use the quick
+redraw only if you have really slow machines where a full redraw takes
+several seconds because the quick redraw is not really safe and may have some
+drawbacks! On normal machines the full redraw should be done in << 1s!
+
+See also the hooks `ecb-redraw-layout-after-hook' and
+`ecb-redraw-layout-before-hook'!
+
+
+File: ecb.info,  Node: Changing window sizes,  Next: Fixing window sizes,  Prev: Redrawing the ECB-layout,  Up: The ECB-layout
+
+Changing the sizes of the special ECB-windows
+---------------------------------------------
+
+The standard width and height of the special ECB-windows is defined with the
+options `ecb-windows-width' and `ecb-windows-height'. But changing these
+options always influences all layouts which is not always desired.
+
+ECB offers to re-adjust the width and height of the ECB-windows (e.g. by
+dragging the windows-borders via the mouse) and then saving exactly these
+current window-sizes for the current layout so after activating this layout
+all windows have autom. the stored sizes.
+
+This is done via the option `ecb-layout-window-sizes' and the commands
+`ecb-store-window-sizes', `ecb-restore-window-sizes' and
+`ecb-restore-default-window-sizes'.
+
+Here is an example how to resize and store the sizes of the ECB-windows of
+layout "left1":
+
+1. Switch to layout "left1" via `ecb-change-layout' (`C-c . lc')
+
+2. Resize the ECB-windows by dragging the window-borders with the mouse
+
+3. Call `ecb-store-window-sizes'
+
+After this layout "left1" will be always drawn with the new sizes until you
+call `ecb-restore-default-window-sizes' during layout "left1" is active.
+
+*Please note*: `ecb-store-window-sizes' stores the width and height of the
+windows per default as fractions of the width (rsp.  height) of the
+ECB-frame, so the stored sizes are always correct regardless of the current
+frame-size! But if called with a prefix argument then fixed sizes are stored.
+
+
+File: ecb.info,  Node: Fixing window sizes,  Next: Creating a new ECB-layout,  Prev: Changing window sizes,  Up: The ECB-layout
+
+Fixing the sizes of the special ECB-windows
+-------------------------------------------
+
+GNU Emacs 21 introduced a new feature which can fix the sizes of a window
+displaying a certain buffer even after resizing the frame. This new feature
+is driven by the new buffer-local variable `window-size-fixed'.
+
+ECB offers an option `ecb-fix-window-size' for fixing the sizes of the
+special ECB-windows/buffers even after frame-resizing. The fix type (valid
+values are `nil', `t', `width' and `height') can either be set on a
+layout-basis (means a different value for each layout) or one value can be
+set for all layouts. In the latter case there is an additional value `auto'
+which choose autom. the senseful fix-type depending on the current
+layout-type: For top-layouts the fix-type `height' and for all other
+layout-types the fix-type `width'.
+
+Probably the most senseful value is `auto' for all layouts because it makes
+less sense to fix the height of the ecb-windows in a left-, right- or
+leftright-layout. Same for fixing the width in a top-layout.
+
+Note: With current Emacs 21.2.X there seems to be no distinction between
+`width', `height' and `t'. Therefore this option takes no effect (means all
+ecb-windows have always unfixed sizes) if `ecb-compile-window-height' is not
+`nil'.
+
+
+File: ecb.info,  Node: Creating a new ECB-layout,  Prev: Fixing window sizes,  Up: The ECB-layout
+
+Interactively creating new layouts
+----------------------------------
+
+If you want to create your own ECB-layout then you can do this very easy "by
+example" with the command `ecb-create-new-layout'.  This command creates a
+new empty frame and offers a small set of keys to create the new layout by
+splitting windows.  `ecb-create-new-layout' and this couple of keys are your
+guide during the layout-creation-process(1).
+
+After calling `ecb-create-new-layout' you will be asked which type of layout
+you want to create: "left", "right", "top" or "left-right". Here you specify
+where the ECB-tree-windows/buffers should be located in the ECB-frame:
+
+ - left: All ECB-tree-windows are located on the left side
+
+ - right: All ECB-tree-windows are located on the right side
+
+ - top: All ECB-tree-windows are located on the top side
+
+ - left-right: All ECB-tree-windows are located on the left and right side
+
+Depending on the type you choose the window is splitted by the values of the
+options `ecb-windows-width' (types "left", "right" and "left-right") or
+`ecb-windows-height' (type "top").
+
+Afterwards you will see a frame like follows (here the layout-type is
+"left-right"):
+
+   -----------------------------------------------------------------
+   |<point>       |                                   |            |
+   |              | ECB-layout creation mode          |            |
+   |              | ========================          |            |
+   |              |                                   |            |
+   |              | <This is a durable help-screen>   |            |
+   |              |                                   |            |
+   |              |                                   |            |
+   |              |                                   |            |
+   |              |                                   |            |
+   |              |                                   |            |
+   |              |                                   |            |
+   |              |                                   |            |
+   |              |                                   |            |
+   |              |                                   |            |
+   |              |                                   |            |
+   -----------------------------------------------------------------
+                  |
+                  |   ,---
+                  `---| Splitted by the value of `ecb-windows-width'.
+                      `---
+
+The big window (here the middle window) will be the edit-window of the new
+layout and can not be selected, deleted or splitted during the creation
+process. It displays the help-screen for the layout-creation mode. Here all
+the available commands are displayed.
+
+The small window(s) (here the left and right windows) can be splitted by you
+wherever you want (`C-s'). The left one contains the point.  You must give
+every ECB-tree-window you create a type (`C-t') which can be either
+
+ * One of the built-in types
+
+   This can be either "directories", "sources", "methods", "history" or
+   "speedbar".
+
+ * Any user-defined type:
+
+   In this case you insert "other" after hitting `C-t' and you will then be
+   asked for the name of the user-defined type. You can insert any arbitrary
+   type name X. But to get this layout working you have to define a function
+   with name `ecb-set-X-buffer' whereas X is the name of the user-defined
+   type you have specified during layout-creation.
+
+   This function `ecb-set-X-buffer' has first to switch to the buffer you
+   want to display in this window and then making this window dedicated. You
+   have to use the macro `ecb-with-dedicated-window' in such a function!
+
+   Here is an example: Suppose you have inserted as type name "example" then
+   you have to define and load a function `ecb-set-example-buffer' which
+   could be defined like follows:
+
+      (defun ecb-set-example-buffer ()
+        (ecb-with-dedicated-window
+          " *ECB example-buffer*"
+          'ecb-set-example-buffer
+            (switch-to-buffer (get-buffer-create " *ECB example-buffer*"))))
+
+   If you forget to define such a function for the user-defined type then
+   nevertheless ECB will draw this layout but it will use the
+   default-function `ecb-set-default-ecb-buffer' instead.
+
+If you are satisfied with your new layout just hit `C-q'. You will be asked
+for a new layout-name (TAB-completion is offered to get a list of all names
+already in use) and after inserting a new(!) name the new layout is saved in
+the file defined by the option `ecb-create-layout-file'. The new layout is
+now available via the option `ecb-layout-name'.
+
+There is no need for you to load the file `ecb-create-layout-file' manually
+into your Emacs because it's automatically loaded by ECB!
+
+*Please note*: During the layout-creation process only the commands displayed
+in the help-screen are available. ALL other commands are temporally disabled
+(even the mouse-commands).
+
+For programming new layouts with emacs-lisp see *Note The layout-engine::.
+
+With the command `ecb-delete-new-layout' you can delete previously created
+layouts (TAB-completion is offered for all names of user created layouts).
+
+---------- Footnotes ----------
+
+(1) During the creation process you will be asked in the minibuffer for
+several options; here you can use TAB-completion and an "empty" RET chooses
+always the first option!
+
+
+File: ecb.info,  Node: Hiding the ECB windows,  Next: Maximizing the ECB windows,  Prev: The ECB-layout,  Up: Usage of ECB
+
+Hiding/Showing the ECB windows
+==============================
+
+With `ecb-toggle-ecb-windows', `ecb-hide-ecb-windows' and
+`ecb-show-ecb-windows' you can hide/show all the ECB windows without changing
+the activation state of ECB and also without deactivating the advices for
+`delete-other-windows' and/or `delete-window'. This is most useful if you use
+a layout like "top2" (*note Tips and tricks::) or if you want to have maximum
+space for editing and you don't need the browsing windows all the time.
+
+The following sequence of hooks is evaluated during showing again the hidden
+ECB-windows:
+1. `ecb-show-ecb-windows-before-hook'
+
+2. `ecb-redraw-layout-before-hook'
+
+3. <Redrawing the layout to show the hidden ECB-windows>
+
+4. `ecb-redraw-layout-after-hook'
+
+5. `ecb-show-ecb-windows-after-hook'
+
+The following sequence of hooks is evaluated during hiding the ECB-windows:
+1. `ecb-hide-ecb-windows-before-hook'
+
+2. <Hiding the ECB-windows>
+
+3. `ecb-hide-ecb-windows-after-hook'
+
+
+File: ecb.info,  Node: Maximizing the ECB windows,  Next: Back/forward navigation,  Prev: Hiding the ECB windows,  Up: Usage of ECB
+
+Maximizing the ECB windows
+==========================
+
+To get a better overlook about the contents of a certain ECB-window every
+ECB-window can be "maximized", means all other ECB-windows are deleted so
+only the edit-window(s) and this maximized ECB-window are visible (and maybe
+a compile-window if active). There are several ways to do this:
+
+ * Via the popup-menus of the ECB-windows
+
+ * Via the main "ECB"-menu and here "Display window maximized"
+
+ * Via calling the adviced version of `delete-other-windows'(1) (bound to
+   `C-x 1') in one of the ECB windows.
+
+ * Via one of the commands `ecb-maximize-window-directories',
+   `ecb-maximize-window-sources', `ecb-maximize-window-methods',
+   `ecb-maximize-window-history' or `ecb-maximize-window-speedbar' or the
+   bound short-cuts for those commands.
+
+ * Via the new command `ecb-cycle-maximized-ecb-buffers' which cycles through
+   all ecb-buffers of current layout by maximizing exactly one of the
+   ecb-windows after every cycle-step.
+
+Minimizing such a maximized ECB-window, i.e. bringing back to its original
+size, can simply be done by redrawing the layout via the command
+`ecb-redraw-layout' (bound to `C-c . lr').
+
+---------- Footnotes ----------
+
+(1) This command is adviced per default, see *Note The edit-window::.
+
+
+File: ecb.info,  Node: Back/forward navigation,  Next: ECB-window synchronizing,  Prev: Maximizing the ECB windows,  Up: Usage of ECB
+
+Back- and forward navigation like a browser
+===========================================
+
+With ECB you can "browse" in your source-files like with a web-browser. This
+means ECB stores the current buffer- and window-position relative to the
+current token(1) in the edit-window after
+
+ - selecting a token in the ECB-methods buffer or
+
+ - selecting a source-file in the ECB-sources/history-buffer.
+
+ECB offers two commands `ecb-nav-goto-next' (`C-c . n') and
+`ecb-nav-goto-previous' (`C-c . p') to go forward and backward within this
+navigation history-list. These commands are also available via the menu "ECB
+-> Navigate".
+
+Aside normal "location-browsing" this is useful for example in a scenario
+where the buffer is narrowed to a token (see `ecb-token-visit-post-actions'):
+
+1. You edit a function
+
+2. Goto another function above the current in the same file
+
+3. Add a few lines
+
+4. Call ecb-nav-goto-previous
+
+   Now you will edit at the same place in the function.
+
+---------- Footnotes ----------
+
+(1) e.g. a method, a variable or any other semantic token
+
+
+File: ecb.info,  Node: ECB-window synchronizing,  Next: Interactive ECB commands,  Prev: Back/forward navigation,  Up: Usage of ECB
+
+Synchronization of the ECB-windows
+==================================
+
+Per default ECB synchronizes automatically the contents of the
+ECB-windows/tree-buffers with the current active edit-window (rsp. the
+current buffer of the edit window):
+
+ * ECB-directories:
+
+   This windows is synchronized to display the directory where the
+   source-file which is displayed in the edit-window is located. If the
+   source-path (i.e. an element of the option `ecb-source-path') containing
+   this directory is not expanded it will be auto. expanded according to the
+   value of the option `ecb-auto-expand-directory-tree' (*note
+   ecb-directories::).
+
+ * ECB-sources:
+
+   The ECB-sources-buffer contains after synchronizing all the sources of the
+   directory of the "current" source-file displayed in the edit-window. The
+   entry of the "current" source-file is highlighted.
+
+ * ECB-methods:
+
+   Contains after synchronizing all the tokens of the buffer in the
+   edit-window, i.e. all methods, variables etc... depending of the
+   major-mode.
+
+ * ECB-history:
+
+   Highlights the entry of the buffer displayed in the edit-window if this
+   buffer is a source-file.
+
+
+This feature can be customized with the option `ecb-window-sync':
+
+If active then the synchronization takes place always a buffer changes in the
+edit window, if deactivated then never. But you can also set this option to a
+list of major-modes and then the sync. will only be done if the major-mode of
+the current buffer belongs NOT to this list.
+
+But in every case the synchronization takes only place if the major-mode of
+the current-buffer in the edit-window has a relation to files or directories.
+Examples for the former one are all programming-language-modes like
+`c++-mode' or `java-mode', `Info-mode' too, an example for the latter one is
+`dired-mode'. For all major-modes related to non-file/directory-buffers like
+`help-mode', `customize-mode' and others never a synchronization will be done!
+
+It's recommended to exclude at least `Info-mode' because it makes no sense to
+synchronize the ECB-windows after calling the Info help.  Per default also
+`dired-mode' is excluded but it can also making sense to synchronize the
+ECB-directories/sources windows with the current directory of the
+dired-buffer in the edit-window.
+
+If you often need to toggle between autom. synchronization on and off then
+customizing the option `ecb-window-sync' is inefficient and therefore ECB
+offers the command `ecb-toggle-window-sync'.
+
+*Please note*: With the command `ecb-window-sync' you can do a manually
+synchronization if the automatic one is switched off or if you just want to
+do this!
+

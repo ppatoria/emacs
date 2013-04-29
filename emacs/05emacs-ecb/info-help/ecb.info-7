@@ -1,0 +1,1056 @@
+This is ecb.info, produced by makeinfo version 4.2 from ecb.texi.
+
+INFO-DIR-SECTION GNU Emacs Lisp
+START-INFO-DIR-ENTRY
+* ECB: (ecb).           Emacs Code Browser
+END-INFO-DIR-ENTRY
+
+
+File: ecb.info,  Node: ecb-faces,  Next: ecb-download,  Prev: ecb-face-options,  Up: Customizable options
+
+Group ecb-faces
+---------------
+
+This group contains the following faces:
+
+`ecb-bucket-token-face:'
+   Face which can be used for displaying bucket tokens in the methods buffer.
+   See also `ecb-bucket-token-display'.
+
+`ecb-default-general-face:'
+   Basic face for all ECB tree-buffers.  It's recommended to define here the
+   font-family, the font-size, the basic color etc.
+
+   In GNU Emacs 21.X all faces (even the face `ecb-default-highlight-face')
+   used in the ECB tree-buffers inherit from this face. Therefore the default
+   attributes like font etc. of a face used in a tree-buffer can be very
+   easily changed with face `ecb-default-general-face'.
+
+   With XEmacs and GNU Emacs 20.X there is no inheritance-feature but the
+   options `ecb-directories-general-face', `ecb-sources-general-face',
+   `ecb-methods-general-face' and `ecb-history-general-face' offer the choice
+   to use the face `ecb-default-general-face' so also with XEmacs and GNU
+   Emacs 20.X the basic face-settings can be easily changed just by
+   customizing the face `ecb-default-general-face'!
+
+`ecb-default-highlight-face:'
+   Define basic face for highlighting the selected node in an ECB tree-buffer.
+
+   In GNU Emacs 21.X all highlighting faces in the ECB tree-buffers inherit
+   from this face. Therefore the default attributes like font etc. of a face
+   used in a tree-buffer for highlighting the current token can be very
+   easily changed with face `ecb-default-highlight-face'.
+
+   With XEmacs and GNU Emacs 20.X there is no inheritance-feature but the
+   options `ecb-directory-face', `ecb-source-face', `ecb-method-face' and
+   `ecb-history-face' offer the choice to use the face
+   `ecb-default-highlight-face' so also with XEmacs and GNU Emacs 20.X the
+   basic face-settings can be easily changed just by customizing the face
+   `ecb-default-highlight-face'!
+
+`ecb-directories-general-face:'
+   Basic face for the ECB directories buffer. It´s recommended to define here
+   the font-family, the font-size, the basic color etc.
+
+`ecb-directory-face:'
+   Define face used for highlighting current directory in the directories
+   buffer.
+
+`ecb-history-face:'
+   Define face used for highlighting current history-entry in the history
+   buffer.
+
+`ecb-history-general-face:'
+   Basic face for the ECB history buffer. It´s recommended to define here the
+   font-family, the font-size, the basic color etc.
+
+`ecb-method-face:'
+   Define face used for highlighting current method, class or variable in the
+   methods buffer.
+
+`ecb-methods-general-face:'
+   Basic face for the ECB methods buffer. It´s recommended to define here the
+   font-family, the font-size, the basic color etc.
+
+`ecb-method-non-semantic-face:'
+   Define face used for displaying tokens of sources not supported by
+   semantic.
+
+`ecb-source-face:'
+   Define face used for highlighting current source in the sources buffer.
+
+`ecb-source-in-directories-buffer-face:'
+   Define a face for displaying sources in the directories buffer.
+
+`ecb-sources-general-face:'
+   Basic face for the ECB sources buffer. It´s recommended to define here the
+   font-family, the font-size, the basic color etc.
+
+`ecb-token-header-face:'
+   Define face used for highlighting the token header after jumping to it by
+   clicking onto a node in the methods buffer.
+
+`ecb-type-token-class-face:'
+   Define face used with option `ecb-type-token-display'.
+
+`ecb-type-token-enum-face:'
+   Define face used with option `ecb-type-token-display'.
+
+`ecb-type-token-group-face:'
+   Define face used with option `ecb-type-token-display'.
+
+`ecb-type-token-interface-face:'
+   Define face used with option `ecb-type-token-display'.
+
+`ecb-type-token-struct-face:'
+   Define face used with option `ecb-type-token-display'.
+
+`ecb-type-token-typedef-face:'
+   Define face used with option `ecb-type-token-display'.
+
+Just call `customize-face <face-name>' to customize these faces for your
+personal taste. Or customize the related option in the group *Note
+ecb-face-options::.
+
+
+File: ecb.info,  Node: ecb-download,  Next: ecb-help,  Prev: ecb-faces,  Up: Customizable options
+
+Group ecb-download
+------------------
+
+This group contains the following options:
+
+ - User Option: download-delete-archive
+   Should the downloaded archive be deleted after successful installation or
+   after failure during the installation-process.  Possible values are:
+
+    - `only-after-success': Archive is only deleted after successful
+      installation but not if a failure occurs during the installation
+      process.
+
+    - `always': Archive is also deleted if an error occurs.
+
+    - `nil': Archive will never be deleted.
+
+ - User Option: download-install-parent-dir
+   Parent directory where downloaded packages are installed.
+
+   ECB installs a downloaded package in this directory, i.e. the downloaded
+   archive X.tar.gz will be extracted in this directory so afterwards this
+   directory contains a new subdirectory X which contains the downloaded
+   package.
+
+   This directory must be write-able!
+
+ - User Option: download-package-version-type
+   Version type ECB is allowed to download for upgrading.
+
+   If you want to upgrade to a newer ECB-version via `ecb-download-ecb' or if
+   you must upgrade to newer semantic- eieio- and/or speedbar-versions
+   (because ECB requires these newer versions) then this option specifies
+   which version-types are allowed.  ECB checks on the download-sites of
+   ECB/semantic/eieio/speedbar which versions are currently available and
+   then downloads always the latest version matching the specified type:
+
+    - 2: Get the newest version of all stable versions available.
+
+    - 1: Get the newest version of all stable and beta versions available.
+
+    - 0: Get the newest version of all stable, beta and alpha versions
+      available.
+
+    - -1: Ask before downloading in the minibuffer for a version
+      (TAB-completion of all available versions is possible).
+
+   So, 2 means stable, 1 means stable and betas, 0 means stable, betas and
+   alphas and -1 means ask the user for a version.
+
+   Per default stable and beta-versions are allowed (value 1).
+
+   But all versions must match the restrictions of the specified min- and
+   max-versions of the required packages. For this see the file README!
+
+ - User Option: download-url
+   URL where download-able ECB-versions are located. The ECB-archive-file
+   (e.g. ecb-1.70.tar.gz) will be appended to this URL and `ecb-download-ecb'
+   will try to download this archive.
+
+   Note: Normally this URL should never change but who knows...
+
+
+File: ecb.info,  Node: ecb-help,  Next: ecb-eshell,  Prev: ecb-download,  Up: Customizable options
+
+Group ecb-help
+--------------
+
+This group contains the following options:
+
+ - User Option: help-html-path
+   Path where the ECB online help in HTML format resides. This must be the
+   location of the `ecb.html' which comes with the ECB distribution. If is
+   installed by unpacking the archive available on the ECB website then this
+   is the subdir `ecb-help-html-subdir' of the installation directory of ECB.
+   If it is installed as XEmacs-package (e.g. via the package manager of
+   XEmacs) then this is probably either the directory "../../html/" or
+   "../../etc/ecb/html/" (both relative to the Elisp directory of ECB).
+
+   The path can either be an absolute path or a path relative to the directory
+   where the Elisp files of ECB are.
+
+   Normally there should be no need to change this option!
+
+ - User Option: help-info-path
+   Path where the ECB online help in info format resides. This must be the
+   location of the `ecb.info' which comes with the ECB distribution. If is
+   installed by unpacking the archive available on the ECB website then this
+   is the subdir `ecb-help-info-subdir' of the installation directory of ECB.
+   If it is installed as XEmacs-package (e.g. via the package manager of
+   XEmacs) then this is probably the directory "../../info/" (relative to the
+   Elisp directory of ECB).
+
+   The path can either be an absolute path or a path relative to the directory
+   where the Elisp files of ECB are.
+
+   Normally there should be no need to change this option!
+
+ - User Option: show-help-format
+   The format `ecb-show-help' shows its online help. Allowed values are 'info
+   (for the Info format) and 'html (for HTML format). If the value is 'html
+   then `browse-url-browser-function' says which browser is used.
+
+   Note: If you got ECB as a standard XEmacs-package maybe the
+   HTML-online-documentation is not included.
+
+
+File: ecb.info,  Node: ecb-eshell,  Next: ecb-non-semantic,  Prev: ecb-help,  Up: Customizable options
+
+Group ecb-eshell
+----------------
+
+This group contains the following options:
+
+ - User Option: eshell-auto-activate
+   Startup the eshell and display it in the compile-window. If current layout
+   does not display a compile-window (see `ecb-compile-window-height') then
+   nothing is done.
+
+ - User Option: eshell-enlarge-when-eshell
+   Enlarge the compile-window if it is selected by `eshell'. This takes only
+   effect if the command `eshell' is called!
+
+ - User Option: eshell-fit-window-to-command-output
+   Fit the compile-window after an eshell-command to the output. This is done
+   by the function `ecb-eshell-fit-window-to-output' which is added to
+   `eshell-post-command-hook' ie. which is running autom.  after each
+   eshell-command.
+
+ - User Option: eshell-synchronize
+   Synchronize eshell with the default-directory of current source-buffer.
+   The synchronization is done by `ecb-eshell-current-buffer-sync' which can
+   be called interactively but normally it is called autom. by the
+   `ecb-current-buffer-sync-hook'.
+
+
+File: ecb.info,  Node: ecb-non-semantic,  Next: ecb-winman,  Prev: ecb-eshell,  Up: Customizable options
+
+Group ecb-non-semantic
+----------------------
+
+This group contains the following options:
+
+ - User Option: auto-save-before-etags-methods-rebuild
+   Automatic saving of current buffer before rebuilding its methods.
+
+   This option is only relevant for sources which are supported and parsed by
+   etags (see `ecb-process-non-semantic-files'). Because etags is an external
+   tool a source-buffer can only be reparsed if the buffer is saved to disk.
+   So the command `ecb-rebuild-methods-buffer' checks for sources which are
+   not supported by semantic or imenu if either this option is t or if the
+   major-mode of the source-buffer is contained in this list: In both cases
+   ECB saves the current source-buffer before it re-runs etags for reparsing
+   the source. If nil or if the major-mode is not contained then no automatic
+   saving will be done!
+
+   For all source supported by semantic or by imenu this option takes no
+   effect.
+
+ - User Option: non-semantic-exclude-modes
+   Exclude modes from parsing with imenu or etags. Per default, ECB tries to
+   parse all file-types not supported by semantic with imenu or etags or some
+   other method (for details see the option
+   `ecb-non-semantic-parsing-function'). If a file-type can not be parsed by
+   semantic, imenu or etags than this simply results in an empty
+   method-buffer for this file. But nevertheless you will get a message
+   "Sorry, no support for a file of that extension" which comes from the
+   speedbar-library and can not switched off. Therefore if a `major-mode' is
+   known as not parse-able by semantic, imenu or etags it can be added to
+   this option and then it will be excluded from being tried to parsed.
+
+ - User Option: non-semantic-methods-initial-expand
+   Initially expand all tokens for not by semantic supported sources.  This
+   option can be customized on a major-mode basis, i.e. if a `major-mode' is
+   contained in this option then all tokens for this modes will be initially
+   expanded - otherwise not.
+
+ - User Option: non-semantic-parsing-function
+   Define mode-dependent parsing functions for non-semantic files. This is an
+   alist where the car is a major-mode symbol and the cdr is a
+   function-symbol of a function which should be used for parsing a
+   non-semantic buffer, i.h. a buffer for which no semantic grammar exists.
+   Such a function gets one argument - the filename of current buffer - and
+   has to generate and return a token/tag list which is understandable by
+   `speedbar-insert-generic-list'. speedbar has already included two
+   functions `speedbar-fetch-dynamic-imenu' and
+   `speedbar-fetch-dynamic-etags' which can be used for parsing buffers with
+   imenu rsp. etags.
+
+   This option takes only effect if `ecb-process-non-semantic-files' is not
+   nil: Then ECB checks for non-semantic buffers if current `major-mode' is
+   contained in this option and if yes, then the specified parsing function
+   is called; if not then the cars of the elements of
+   `speedbar-dynamic-tags-function-list' are called in that sequence they are
+   listed in this variable. See option `speedbar-dynamic-tags-function-list'
+   for further details.
+
+   In most cases imenu-parsing is preferable over etags-parsing because imenu
+   operates on Emacs-buffers and needs no external tool and therefore parsing
+   works also if current contents of a buffer are not saved to disk. But
+   maybe sometimes etags may return better parsing results
+
+   IMPORTANT: if imenu-parsing should be used then the option
+   `speedbar-use-imenu-flag' must be set to not nil!
+
+ - User Option: process-non-semantic-files
+   Display content of non-semantic-files in the ECB-methods-buffer. See also
+   `ecb-non-semantic-parsing-function'.
+
+ - User Option: rebuild-non-semantic-methods-before-hook
+   Hook running at beginning of the function
+   `ecb-rebuild-methods-buffer-for-non-semantic'. This function is always
+   called by the command `ecb-rebuild-methods-buffer' for not semantic
+   supported source-types.
+
+   Every function of this hook gets one argument: The complete filename of
+   the current source-buffer in the edit-window. The Method-buffer is only
+   rebuild by `ecb-rebuild-methods-buffer-for-non-semantic' if either the
+   hook contains no function (the default) or if no function of this hook
+   returns nil! See `run-hook-with-args-until-failure' for description how
+   these function are processed.
+
+
+File: ecb.info,  Node: ecb-winman,  Prev: ecb-non-semantic,  Up: Customizable options
+
+Group ecb-winman
+----------------
+
+This group contains the following options:
+
+ - User Option: winman-escreen-number
+   Number of the escreen which is reserved for ECB. If you go to the escreen
+   with this number you go always to the escreen with activated ECB. All
+   other escreen-numbers are escreens with deactivated ECB!
+
+ - User Option: winman-winring-name
+   Name of the winring-window-configuration reserved for ECB. If you go to
+   the window-configuration with this name you go always to the
+   window-configuration with activated ECB. All other window-configuration
+   are configurations with deactivated ECB!
+
+
+File: ecb.info,  Node: Submitting problem report,  Next: Upgrading,  Prev: Customizing,  Up: Top
+
+Submitting a problem report
+***************************
+
+If you run into problems with ECB you should first take a look into
+
+ - *Note FAQ:: or
+
+ - *Note Conflicts and bugs:: or
+
+ - *Note Tips and tricks:: or
+
+ - the appropriate section of this online-manual.
+
+If your problem(s) still remain you can/should send a problem report to the
+ECB mailing list <ecb-list@lists.sourceforge.net>. ECB offers you a command
+which does all necessary for you to send a problem report. Just call
+`ecb-submit-problem-report'! Please read the documentation of this command,
+see *Note Interactive ECB commands::.
+
+This command creates a problem-report buffer for you. After that you get a
+menu "Mail" (dependent on the mail-package used, the menu can have a
+different name) with commands to send the problem report. But for this the
+variable `mail-user-agent' must be configured right for your system. If you
+can´t get working this mechanism you can simply copy the whole problem-report
+buffer after filling it out and sending it with your standard mail-client to
+<ecb-list@lists.sourceforge.net>!
+
+Please read also the documentation of the option `ecb-debug-mode' and switch
+on the debug mode of ECB (also available in the Help-menu of ECB!) before
+submitting a problem-report!
+
+
+File: ecb.info,  Node: Upgrading,  Next: Tips and tricks,  Prev: Submitting problem report,  Up: Top
+
+Upgrading and downloading packages
+**********************************
+
+This chapter describes all aspects of upgrading to a newer version of ECB.
+
+The first section describes how to download and install a new package from
+the web, where "package" means either ECB itself or the required libraries
+semantic, eieio and speedbar.
+
+After installing a new ECB-version ECB checks if the values of the customized
+ECB-options are still compatible. If not ECB does some smart things. This is
+the topic of the second section.
+
+* Menu:
+
+* Downloading new versions::    How to download newer versions of packages
+* Auto. option-upgrading::      ECB can auto. upgrade your options
+
+
+File: ecb.info,  Node: Downloading new versions,  Next: Auto. option-upgrading,  Prev: Upgrading,  Up: Upgrading
+
+Downloading new versions of ECB and/or required packages
+========================================================
+
+ECB offers the possibility to upgrade to newer versions direct from the
+ECB-website. This can be done if the following requirements are satisfied:
+
+1. A connection to the web is available
+
+2. The tools "wget", "tar" and "gzip" are installed
+
+   With Unix-systems these tools are in the standard-distribution. If you are
+   running any Microsoft Windows system then you need cygwin(1) which offers
+   these tools too. On every system these tools must reside in the `PATH'
+   environment-variable!
+
+   If you are behind a firewall and you have to use a proxy you maybe need
+   the following wget-configuration in your file `~/.wgetrc':
+
+      # Define your proxies (where 8080 and 8081 are examples
+      # for the port-numbers)
+      http_proxy = http://your.proxy.com:8080
+      ftp_proxy  = http://your.ftpproxy.com:8081
+      
+      # If you do not want to use proxy at all, set this to off.
+      use_proxy = on
+
+If these requirements are satisfied you can download and install both ECB
+itself and also the required versions of semantic, eieio and speedbar:
+
+ * Download a new ECB-version with `ecb-download-ecb':
+
+   A description for this command you will find in *Note Interactive ECB
+   commands::. Check also the options of the customize-group 'ecb-download'
+   (*note ecb-download::).
+
+ * Download and install of required packages:
+
+   ECB checks at load-time if the packages semantic, eieio and speedbar are
+   at least installed and at start-time if the required versions of semantic,
+   eieio and speedbar (see `README') are installed and loaded into Emacs. If
+   not you will be asked if you want auto. download and install them. If you
+   confirm this then ECB does the following:
+
+   1. Checking which versions are available at the download-site of the
+      required packages. With the option `ecb-download-package-version-type'
+      you can specify which type of versions (only stable, stable and betas
+      or stable, betas and alphas) you allow to download and install. This
+      option offers also the choice of asking you for a certain version.
+      Depending of this setting ECB either ask you which version it should
+      download and install or chooses autom. the newest version available
+      which is matching both its min-max-requirements and the setting in
+      `ecb-download-package-version-type'.
+
+      NOTE: Currently there are only beta-versions of speedbar available
+      therefore this option has to be set to 1 (allow stable and beta
+      versions). But the speedbar beta-versions are very stable!
+
+   2. Downloading and installing the right version (see 1.) of the required
+      packages. ECB downloads and installs the new package versions in
+      subdirectories of `ecb-download-install-parent-dir'.
+
+   If both of these actions succeed then you will get a message-buffer which
+   tells you something like:
+
+      -----------------------------------------------------------------
+      Current state of the required packages semantic, eieio, speedbar:
+      
+      - semantic author-version must be [1.4, 1.4.9]:
+        Installed in /usr/local/lib/site-lisp/semantic-1.4
+      
+      - eieio author-version must be [0.17, 0.17.9]:
+        Correct version already loaded!
+      
+      - speedbar author-version must be [0.14beta1, 0.15.9]:
+        Correct version already loaded!
+      
+      After adding the new directory to your `load-path' and then
+      restarting Emacs the new package(s) can be activated.
+      -----------------------------------------------------------------
+
+   *Remark 1*: "P author-version must be [x y]" means, that ECB requires
+   package P in a version-number >= x and <= y.
+
+   *Remark 2*: By setting the option `ecb-version-check' to `nil' you can
+   prevent ECB from checking correct versions of semantic, eieio and speedbar
+   but it's strongly recommended not to do this!
+
+---------- Footnotes ----------
+
+(1) cygwin is available at <http://cygwin.com/>
+
+
+File: ecb.info,  Node: Auto. option-upgrading,  Prev: Downloading new versions,  Up: Upgrading
+
+Automatic upgrading of options
+==============================
+
+* Menu:
+
+* User interface::              Options and commands you should know
+* Background information::      Maybe some interesting informations
+
+
+File: ecb.info,  Node: User interface,  Next: Background information,  Prev: Auto. option-upgrading,  Up: Auto. option-upgrading
+
+User interface for option-upgrading
+-----------------------------------
+
+There are two interactive commands (*note Interactive ECB commands::):
+
+ - `ecb-upgrade-options': Does all necessary beginning with a
+   incompatibility-check for all options, upgrading/resetting incompatible
+   options and ending with the display of all upgraded or reset options.
+
+ - `ecb-display-upgraded-options': Displays a temp. buffer with all upgraded
+   or reseted ECB-options with their old and new values.
+
+If the option `ecb-auto-compatibility-check' has a non-nil value (which is
+the default) then ECB does all this stuff automatically at startup. This is
+very recommended!
+
+If you are interested in some background information, read *Note Background
+information::!
+
+
+File: ecb.info,  Node: Background information,  Prev: User interface,  Up: Auto. option-upgrading
+
+Background information
+----------------------
+
+Big packages like ECB will be enhanced and developed continuously so
+sometimes a new version must be released. Such packages offer in general a
+lot of customizable options so probably some of these options change the type
+or are renamed because the old type and/or name of the option makes no sense
+in the new release.
+
+Especially options which have changed the type of their value are now a
+problem for the user which want to upgrade to the latest ECB-version: If the
+user has saved a certain value for option X in its file `.emacs' but the type
+of this saved value doesn't match the new defined type in the defcustom-form
+after an ECB-upgrade then there can occur serious problems like ECB can not
+be started anymore or even Emacs can not be started without errors.
+
+Until now there was only one way to fix these problems: The user must
+manually edit his file `.emacs' and remove all entries for options which have
+now another type. After this and after restarting Emacs the new
+default-values of the type-changed options in the new ECB-release are active
+and the user can go on using Emacs and ECB. But this approach to fix the
+incompatible-option-problem has two serious drawbacks:
+
+1. The user must manually edit the customize-section in his file `.emacs'.
+   This should normally not be done and if then only by old-handed
+   Emacs-users.
+
+2. The customized value of the option X in the old-release (with the old
+   type) is lost because after removing the related entry from the file
+   `.emacs' the new default-value is active, so the user must re-customize
+   the option X.
+
+OK, this is one half of the option-upgrade-problem but a new ECB-release can
+also rename a option from name X to name Y because the new name Y makes much
+more sense and/or is more mnemonic. If only the name has changed but not the
+type this is not a serious problem like above but also annoying because the
+customized value of the old-option X takes no effect in the new release but
+instead the default-value of the new-option Y is now active.  But
+nevertheless this problem has the drawback number 2 (see above).
+
+The last category of upgrade-problems is a renamed option which has also
+changed its type.
+
+ECB has a solution for all these problems:
+
+ * It checks all customized values of all ECB-options if they are still
+   type-compatible. If not then it tries to upgrade the old-value to the new
+   value-type and if this is not possible then it resets the option to the
+   new default value and store it via customize in the .emacs-file (or in any
+   file which is used for customized options).
+
+ * It offers a special constant `ecb-upgradable-option-alist' which allows
+   the ECB-maintainers to define special transformings for renamed options so
+   even the value of an old-option X can be savely transformed to the
+   new-option Y and the old setting is not lost.
+
+All these checks and transformings are done at beginning of activating ECB -
+if the option `ecb-auto-compatibility-check' is not nil. If ECB has
+recognized incompatible or renamed options it does its upgrading/reseting-job
+so all ECB-options have correct types so ECB can start correct. After ECB is
+started it displays a list of all upgraded or reseted option with their old
+and new values.
+
+
+File: ecb.info,  Node: Tips and tricks,  Next: Elisp programming,  Prev: Upgrading,  Up: Top
+
+Tips and tricks
+***************
+
+This chapter contains some tips and tricks how to deal best with some
+situations.
+
+* Menu:
+
+* Changing faces::              Changing faces in the ECB tree-buffers
+* Small screens::               Working with small screens
+* Big screens::                 Working with big screens
+* Simulating speedbar::         Simulating speedbar without an extra frame
+* Integrating speedbar::        Integrating speedbar in the ECB-frame
+* Optimize scrolling::          Optimize scrolling in the edit-window
+* Large directories::           Working with large directories
+* Using eshell::                Optimal using of eshell in ECB
+* Grepping directories::        Grepping directories with ECB
+* Working with JDEE::           Working best with ECB and JDEE
+* Compile-window on demand::    Displaying the compile-window on demand
+* Non-semantic sources::        Parsing and displaying non-semantic sources
+* Hide-show::                   Using hide-show from the methods-buffer-menu
+* Window-managers and ECB::     Support of several Emacs-window-managers
+
+
+File: ecb.info,  Node: Changing faces,  Next: Small screens,  Prev: Tips and tricks,  Up: Tips and tricks
+
+Changing faces in the ECB tree-buffers
+======================================
+
+There are two basic faces:
+
+ * `ecb-default-general-face': Basic face for displaying an ECB-tree-buffer.
+
+   It´s recommended to define the font-family, the font-size, the basic color
+   etc. with this face.
+
+   In GNU Emacs 21.X all faces (even the face `ecb-default-highlight-face')
+   used in the ECB tree-buffers inherit from this face. Therefore the default
+   attributes like font etc. of a face used in a tree-buffer can be very
+   easily changed with face `ecb-default-general-face'.
+
+   With XEmacs and GNU Emacs 20.X there is no inheritance-feature but the
+   options `ecb-directories-general-face', `ecb-sources-general-face',
+   `ecb-methods-general-face' and `ecb-history-general-face' offer the choice
+   to use the face `ecb-default-general-face' so also with XEmacs and GNU
+   Emacs 20.X the basic face-settings can be easily changed just by
+   customizing the face `ecb-default-general-face'.
+
+ * `ecb-default-highlight-face': Basic face for highlighting the current node
+   in an ECB-tree-buffer.
+
+   In GNU Emacs 21.X all highlighting faces used in the ECB tree-buffers
+   inherit from this face. Therefore the default attributes like font etc. of
+   a highlighting face used in a tree-buffer can be very easily changed with
+   face `ecb-default-highlight-face'.
+
+   With XEmacs and GNU Emacs 20.X there is no inheritance-feature but the
+   options `ecb-directory-face', `ecb-source-face', `ecb-method-face' and
+   `ecb-history-face' offer the choice to use the face
+   `ecb-default-highlight-face' so also with XEmacs and GNU Emacs 20.X the
+   basic face-settings can be easily changed just by customizing the face
+   `ecb-default-highlight-face'.
+
+
+With these faces you can change the basic attributes easily and fast for ALL
+ECB-tree-buffers. But you are also able to display each ECB-tree-buffer with
+different faces, see the different options for every tree-buffer mentioned
+above.
+
+*Please note* (only for XEmacs users): Cause of the lack of the
+font-inheritance feature using ONE other font for the ECB-methods buffer can
+NOT be achieved just by setting `ecb-methods-general-face' to
+`ecb-default-general-face' and changing the font of this default face. In
+addition you have to set the same font also for the face
+`ecb-bucket-token-face' like in the following example:
+
+   (defconst my-ecb-font
+             "-outline-Courier-normal-normal-13-97-96-96-c-*-iso8859-1")
+   (set-face-font 'ecb-default-general-face my-ecb-font)
+   (set-face-font 'ecb-bucket-token-face my-ecb-font)
+
+This code sets the new defined font `my-ecb-font' as font for all(1)
+ECB-tree-buffers (incl. the methods buffer).
+
+---------- Footnotes ----------
+
+(1) Of course `ecb-directories-general-face', `ecb-sources-general-face',
+`ecb-methods-general-face' and `ecb-history-general-face' must be set to
+`ecb-default-general-face'!
+
+
+File: ecb.info,  Node: Small screens,  Next: Big screens,  Prev: Changing faces,  Up: Tips and tricks
+
+Working with small screens
+==========================
+
+If your screen is very small so you need every square-centimeter for
+displaying the buffer which you want to edit, ECB offers you a special
+layouts, where only the ECB-methods buffer is displayed on top or on
+left-side. Here comes what you should/can do to work best with ECB in such a
+situation:
+
+ * First customize your ECB:
+
+   1. Customize `ecb-layout-name' to layout-name "top2" (on top) or "left9"
+      (on left-side)
+
+   2. Ensure that `ecb-compile-window-height' is nil.
+
+   3. Optional: Adjust the `ecb-windows-height' rsp. `ecb-windows-width'.
+
+   4. Save your changes.
+
+ * To edit your buffers: Call `ecb-toggle-ecb-windows' (also available via
+   the menu "ECB" and by `C-c . lw') or `ecb-hide-ecb-windows' to hide the
+   ECB-method buffer so you get all the place of your screen for editing.
+
+ * To browse and select functions: Call `ecb-toggle-ecb-windows' or
+   `ecb-show-ecb-windows' to make the ECB-method buffer visible if not
+   already. If you want select a method/variable with the keyboard instead
+   with the mouse you should read the section *Note Using the keyboard:: in
+   this online help!
+
+The possibility of hiding temporally the ECB windows like described above is
+also useful for all the other layouts.
+
+
+File: ecb.info,  Node: Big screens,  Next: Simulating speedbar,  Prev: Small screens,  Up: Tips and tricks
+
+Working with big screens
+========================
+
+ECB offers a layout type "left-right" with special ECB-tree-windows on the
+left and right side of the edit-window. The layouts "leftright1" and
+"leftright2"are examples for this layout type.  See *Note Creating a new
+ECB-layout:: and *Note The layout-engine:: for details about how to create or
+program more layouts of this type.
+
+Such a layout is eventually the best choice for big screens because the
+several ECB-tree-windows are bigger and can display more informations without
+scrolling.
+
+With such a layout it can could be senseful to reduce the value of the option
+`ecb-windows-width' compared to layouts of type left or right. A value of
+max. 0.25 should be enough.
+
+
+File: ecb.info,  Node: Simulating speedbar,  Next: Integrating speedbar,  Prev: Big screens,  Up: Tips and tricks
+
+Simulating speedbar without an extra frame
+==========================================
+
+You can simulate a speedbar-like layout within ONE frame by doing the
+following:
+
+1. Customize `ecb-layout-name' to layout name "left9", "left12", "left13" or
+   "left14" dependent to what you like.
+
+2. Optional: Ensure that `ecb-compile-window-height' is nil.
+
+3. Optional: Adjust the `ecb-windows-width'.
+
+4. Optional: Customize `ecb-toggle-layout-sequence' and toggle very fast
+   between several layouts by `ecb-toggle-layout'. See the doc-strings!
+
+5. Optional: Customize `ecb-show-sources-in-directories-buffer' to not nil if
+   the chosen layout (see 1. and 4.) contains a directories-tree-buffer.
+
+6. Save your changes.
+
+But not only simulating speedbar is possible but also full integrating it
+into the ECB and the ECB-frame, *Note Integrating speedbar::.
+
+
+File: ecb.info,  Node: Integrating speedbar,  Next: Optimize scrolling,  Prev: Simulating speedbar,  Up: Tips and tricks
+
+Integrating speedbar in the ECB-frame
+=====================================
+
+It is very easy to integrate speedbar into ECB. There are two different ways
+to do this:
+
+1. You can either use speedbar in the directories-, sources- or
+   methods-window of ECB instead of the built-in directory-, sources- or
+   methods-browser of ECB. This can be done via the option
+   `ecb-use-speedbar-instead-native-tree-buffer'.
+
+2. Or you can integrate an extra speedbar-window into a layout independent of
+   the existence of a directory-, sources- or methods-window. For this you
+   can either use the built-in layout "left-dir-plus-speedbar" or you have to
+   create your own layout interactively with the command
+   `ecb-create-new-layout'. This way is not described in more details because
+   there is nothing more to describe - just create your layout.
+
+In general integrating speedbar into the ECB-frame makes sense for people...
+
+ * ...who like the speedbar way of handling directories and source-files but
+   also like the ECB-way of displaying the buffer-contents (like methods and
+   variables in a source-file). This people should use the option
+   `ecb-use-speedbar-instead-native-tree-buffer' and set it to `dir'.
+
+ * ...who like the speedbar way of browsing things like directories, files,
+   file-contents etc. but who dislike the extra speedbar-frame.
+
+Note: It is not necessary to integrate speedbar if you only want parsing
+sources not supported by semantic. From version 1.94 on ECB supports native
+parsing and displaying of such sources (*note Non-semantic sources::)!
+
+Regardless the group you belong, with the speedbar-integration feature of ECB
+you can combine both worlds, the speedbar- and the ECB-world:
+
+1. Choose a layout which either contains a directories- or a sources-window
+   but not both of them(1).
+
+   Because speedbar has also display-modes for buffers and info-nodes and
+   some other useful things (which can be changed by the speedbar-command
+   `speedbar-change-initial-expansion-list' we recommend layouts like
+   "left15" or "leftright3" for using with speedbar.
+
+2. Set the option `ecb-use-speedbar-instead-native-tree-buffer' to not nil.
+   After this the chosen window of ECB will contain a full featured speedbar
+   (the only difference to standard speedbar is not residing in an extra
+   frame).
+
+Note: If you belong to the first group of people (s.a.) a similar effect and
+usability is available by setting
+`ecb-use-speedbar-instead-native-tree-buffer' to nil and setting
+`ecb-show-sources-in-directories-buffer' to not nil, because this combination
+displays also directories and sources in one window.
+
+So with the option `ecb-use-speedbar-instead-native-tree-buffer' you have the
+choice which way of displaying and handling "things" (directories, sources,
+methods...) you want (the speedbar- or the ECB-way).
+
+During speedbar is running within ECB (i.e.
+`ecb-use-speedbar-instead-native-tree-buffer' is not nil) the
+speedbar-command `speedbar' is disabled and the speedbar-command
+`speedbar-get-focus' switches between the speedbar-window and the
+edit-window(2).
+
+*IMPORTANT*: ECB can only integrate speedbar-versions >= 0.14beta1! If you
+use lower versions of speedbar `ecb-use-speedbar-for-directories' has no
+effect.
+
+---------- Footnotes ----------
+
+(1) Only one of them is needed if you use speedbar because speedbar displays
+directories and sources in one window. But if you like wasting space then you
+can also use a layout with both windows...
+
+(2) The standard behavior is switching between the speedbar-frame and the
+attached frame, but this make obviously no sense during running speedbar with
+ECB.
+
+
+File: ecb.info,  Node: Optimize scrolling,  Next: Large directories,  Prev: Integrating speedbar,  Up: Tips and tricks
+
+Optimize scrolling in the edit-window
+=====================================
+
+Emacs 20.X seems to slow down scrolling if there is a horizontal split in the
+frame and/or a lot of overlays in the buffer which is scrolled.  This is
+independent of ECB! But because almost all layouts of ECB uses horizontal
+splits of the frame and because ECB is based on semantic which uses overlays
+intensively there can be poor scrolling performance in large buffers,
+especially with java-buffers in `jde-mode'.
+
+This scrolling performance can be increased a lot if the options
+`scroll-conservatively' and `scroll-step' are set appropriately: The former
+one should have a value of 0 during ECB is active and the latter one a value
+of either 0 or > 1 (the exact value depends on the power of your machine).
+
+As far as we know this is not a problem of Emacs 21.X or XEmacs. With these
+versions of Emacs there should be no scrolling problem even with
+`scroll-step' has value 1.
+
+
+File: ecb.info,  Node: Large directories,  Next: Using eshell,  Prev: Optimize scrolling,  Up: Tips and tricks
+
+Working with large directories
+==============================
+
+If `ecb-source-path' contains directories with many files and subdirs,
+especially if these directories are mounted net-drives ("many" means here
+something > 1000, dependent on the speed of the net-connection and the
+machine), actualizing the sources- and/or directories- buffer of ECB (if
+displayed in current layout!) can slow down dramatically. If this is a
+problem the contents of certain directories and also the contents of the
+sources-buffer can be cached which increases the speed a lot. See
+`ecb-cache-directory-contents'.
+
+IMPORTANT: The full speed-advantage of this cache-mechanism is only available
+if `ecb-show-sources-in-directories-buffer' is `nil', i.e. sources of a
+directory are displayed in the ECB-sources-window. The reason is that only
+with a sources window the tree-buffer contents for the sources can be cached
+(i.e. the buffer-content of the ECB-sources-window) whereas with sources
+displayed in the directories buffer only the disk-contents of a directory are
+cached - which increases speed too but not so much as with sources displayed
+in the extra window ECB-sources.
+
+The cache of a directory can be only refreshed by a POWER-click (with mouse
+or keyboard) onto the related directory-node in the directories-buffer of ECB
+(*note Using the mouse::).
+
+
+File: ecb.info,  Node: Using eshell,  Next: Grepping directories,  Prev: Large directories,  Up: Tips and tricks
+
+Optimal using of eshell in ECB
+==============================
+
+ECB offers a very smart integration of the "eshell" if you are using a
+compile window (*note Temp- and compile-buffers::)(1)
+
+Here is a short summary of provided features:
+
+ * Ability to jump to the eshell buffer within the compilation window by
+   simply call `eshell' (bound to `C-c . e'). If the eshell isn't running it
+   will be started.
+
+ * Expands the compilation window when you run commands. So for example it
+   allows you to view the eshell in minimized mode and then when you run "ls"
+   the window automatically expands (but always depending of the output of
+   the command you run).
+
+ * Synchronizes the current directory of the eshell with the current buffer
+   in the edit-window of ECB.
+
+ * Provides smart window layout of the eshell buffer. This makes sure that
+   the eshell is taking up the exact amount of space and that nothing is
+   hidden.
+
+Here comes a detailed explanation of these features and how to use it (all
+these features are only available if you use a durable compile-window, i.e.
+if `ecb-compile-window-height' is not nil):
+
+You have not to learn a new command for the eshell-start - just call `eshell'
+(for convenience also bound to `C-c . e') and the eshell will displayed in
+the compile-window of ECB (if eshell is not already alive then it will be
+started automatically).
+
+ECB tries to display the contents of the eshell-buffer as best as possible,
+means ECB can autom. enlarge and shrink the compile-window so the contents of
+the eshell are fitting the window. See option
+`ecb-eshell-enlarge-when-eshell' and
+`ecb-eshell-fit-window-to-command-output'. Normally this is done autom. but
+you can also you the standard compile-window enlarging-command of ECB:
+`ecb-toggle-compile-window-height'.
+
+ECB tries also to recenter the eshell-buffer as best as possible.  Normally
+this is done autom but you can do it on demand with the command
+`ecb-eshell-recenter'.
+
+If option `ecb-eshell-synchronize' is true then ECB always synchronizes the
+command prompt of eshell with the directory of current source-buffer of the
+edit-window.
+
+With the option `ecb-eshell-auto-activate' you can start eshell autom. in the
+compile-window when ECB is started but of course if a compile-window exists.
+
+---------- Footnotes ----------
+
+(1) Of course you can use eshell also if there is no compile-window. Then it
+is just displayed in the edit-window and there is no special integration.
+
+
+File: ecb.info,  Node: Grepping directories,  Next: Working with JDEE,  Prev: Using eshell,  Up: Tips and tricks
+
+Grepping directories with ECB
+=============================
+
+ECB offers in the popup-menus in the directories- and sources-tree-buffer
+commands for easy (recursive) grepping the current directory under point
+(directory-buffer) rsp. the current-directory (sources-buffer). In every case
+just the function of the options `ecb-grep-function' rsp.
+`ecb-grep-find-function' is called and the `default-directory' is tempor. set
+to the chosen directory so the grep will performed in this directory
+regardless of the `default-directory' of current buffer in the edit-window.
+
+Other smart things beyond that are not done by ECB, see also
+`ecb-grep-function'!
+
+So, how to exclude some subdirectories or files from the grep?
+
+Basically this has to be done with the "-prune" option of the find-utility:
+If the standard-grep facility of Emacs is used then this is not easy but with
+the library `igrep.el' there is a convenient way to exclude things like CVS-
+or RCS-directories from the find-call: See the variable
+`igrep-find-prune-clause' of the library `igrep.el'.
+
+
+File: ecb.info,  Node: Working with JDEE,  Next: Compile-window on demand,  Prev: Grepping directories,  Up: Tips and tricks
+
+Working best with ECB and JDEE
+==============================
+
+ECB is completely language independent, i.e. it works with any language
+supported by semantic (e.g. C, C++, Java, Elisp etc.).
+
+But there are some special integrations for the great
+Java-Development-Environment JDEE:
+
+ * Displaying contents of class under point
+
+   With the command `ecb-jde-display-class-at-point' you can display the
+   contents of the class which contains the definition of the "thing" at
+   point (which can be a method, variable etc.).
+
+ * Creating new source-files
+
+   The popup-menus in the directories- and the sources-buffer offer a command
+   "Create Source" which allows easy creating new java-sources by calling the
+   command `jde-gen-class-buffer'.
+
+
+File: ecb.info,  Node: Compile-window on demand,  Next: Non-semantic sources,  Prev: Working with JDEE,  Up: Tips and tricks
+
+Displaying the compile-window on demand
+=======================================
+
+If you like displaying all output of compile/grep/etc. an all temp-buffers
+like *Help*-buffers in an extra compile-window (*note Temp- and
+compile-buffers::) but you dislike wasting the space of this compile-window
+if you are just editing then you can get a compile-window "on demand". Just
+do the following:
+
+1. Customize `ecb-compile-window-height' to not nil and save it for future
+   sessions. This gives you an extra compile-window at the bottom.
+
+2. Add the following to your .emacs:
+
+      (add-hook 'ecb-activate-hook
+                (lambda ()
+                   (ecb-toggle-compile-window -1)))
+
+   This hides the extra compile-window direct after the start of ECB because
+   there is no need for a compile-window at this moment.
+
+
+This is all you have to do. Now if you run `compile' (or `grep' or other
+compile-modes) or display temp-buffers like *Help*-buffers then ECB autom.
+displays the compile-window at the bottom and display the output there.
+
+If you have finished with using the compile- or temp-output (e.g.  fixing
+errors) then you can throw away the compile-window just by
+`ecb-toggle-compile-window' - ECB will reactivate it autom.  before next
+compilation or help-buffer-display.!
+

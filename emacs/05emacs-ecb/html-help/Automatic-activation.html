@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+<title>ECB - the Emacs Code Browser</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="ECB - the Emacs Code Browser">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Automatic%20activation">Automatic activation</a>,
+Previous:<a rel=previous accesskey=p href="Standard-activation.html#Standard%20activation">Standard activation</a>,
+Up:<a rel=up accesskey=u href="Activation-and-Deactivation.html#Activation%20and%20Deactivation">Activation and Deactivation</a>
+<hr><br>
+
+<h3>Automatic activation and deactivation</h3>
+
+<p>There are three options for auto. (de)activation ECB after Emacs-start
+and also major-mode based.
+
+<dl>
+<dt><code>ecb-auto-activate</code>
+<dd>This option is for auto. activating ECB after Emacs-startup. Set this
+to not nil and ECB will automatically be started after Emacs comes up.
+
+<br><dt><code>ecb-major-modes-activate</code>
+<dt><code>ecb-major-modes-deactivate</code>
+<dd>These option give you the possibility to activate (rsp. deactivate)
+ECB on a major-mode basis, means you can define for which major-modes
+ECB should be activated and for which modes it should deactivated (See
+<a href="Activation-hook-sequence.html#Activation%20hook-sequence">Activation hook-sequence</a> and <a href="Deactivation-hook-sequence.html#Deactivation%20hook-sequence">Deactivation hook-sequence</a>).
+
+<p>If activating or deactivating is too strong you can also customize ECB
+with these two option only hiding/showing it's ECB-windows
+(tree-buffers) on a major-mode basis. At last this is nothing more
+than auto. calling <code>ecb-toggle-ecb-windows</code> (see <a href="Interactive-ECB-commands.html#Interactive%20ECB%20commands">Interactive ECB commands</a>) depending which major-mode is active. 
+</dl>
+
+<p>If you activate ECB on a major-mode basis you probably want switch off
+displaying the tip of the day. You can do this with the option
+<code>ecb-tip-of-the-day</code>.
+
+</body></html>
+

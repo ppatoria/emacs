@@ -1,0 +1,6 @@
+#CVSGrab settings
+#Mon Sep 10 12:43:19 CEST 2007
+projectRoot=ecb
+rootUrl=http\://ecb.cvs.sourceforge.net/
+packagePath=/ecb/ecb-images/directories/height-15//
+webInterface=ViewVC1_0

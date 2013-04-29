@@ -1,0 +1,6 @@
+#CVSGrab settings
+#Mon Sep 10 12:40:45 CEST 2007
+projectRoot=ecb
+rootUrl=http\://ecb.cvs.sourceforge.net/
+packagePath=/ecb/ecb-images/directories/
+webInterface=ViewVC1_0

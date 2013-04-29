@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+<title>ECB - the Emacs Code Browser</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="ECB - the Emacs Code Browser">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Customizing%20the%20display">Customizing the display</a>,
+Next:<a rel=next accesskey=n href="Rebuilding-the-Methods.html#Rebuilding%20the%20Methods">Rebuilding the Methods</a>,
+Previous:<a rel=previous accesskey=p href="Expanding.html#Expanding">Expanding</a>,
+Up:<a rel=up accesskey=u href="The-Methods-buffer.html#The%20Methods%20buffer">The Methods buffer</a>
+<hr><br>
+
+<h4>Customizing the display of the Methods-buffer</h4>
+
+<p>The ECB-Methods buffer is probably the most important browsing window
+offered by ECB. It displays all parsing informations of the current
+source-buffer (the buffer displayed in the edit-window).
+
+<p>Normally ECB gets all informations displayed in this Methods-buffer
+from the semantic-library - at least for semantic-sources. This
+library parses auto. the current source-buffer in the edit-window of
+ECB and returns all information in form of <dfn>tokens</dfn> to ECB which
+displays them in a browse-able form in its Method-buffer. See <a href="ECB-Methods-buffer.html#ECB%20Methods-buffer">ECB Methods-buffer</a> for information how to use the Methods-buffer.
+
+<p>There are several options to customize which tokens ECB should display
+in general, if the tokens should be collapsed or expanded, how to
+fontify them (i.e. syntax-highlighting) and something more.
+
+<dl>
+<dt><code>ecb-show-tokens</code>
+<dd>Which semantic-tokens (e.g. types, methods, variables etc.) should be
+displayed and should they be collapsed, flattened or expanded. Sorting
+is also possible.
+
+<br><dt><code>ecb-font-lock-tokens</code>
+<dt><code>ecb-type-token-display</code>
+<dd>How to fontify the tokens in the Method-buffer
+
+<br><dt><code>ecb-token-display-function</code>
+<dd>ECB and semantic offer several predefined functions for displaying the
+tokens. Here you can customize, what informations tokens should
+contain (only the method-name or the whole signature or something
+else) and what notation should be used, e.g. UML or not.
+
+</dl>
+
+<p>These are the most important options for this topic but it is
+recommended to have a look into the customize-group <code>ecb-methods</code>
+(see <a href="ecb-methods.html#ecb-methods">ecb-methods</a>) and check all the options offered there!
+
+<p>All these options are only relevant for semantic-sources and take no
+effect for non-semantic-sources!
+
+</body></html>
+

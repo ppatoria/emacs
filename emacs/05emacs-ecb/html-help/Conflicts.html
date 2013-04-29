@@ -1,0 +1,179 @@
+<html lang="en">
+<head>
+<title>ECB - the Emacs Code Browser</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="ECB - the Emacs Code Browser">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Conflicts">Conflicts</a>,
+Next:<a rel=next accesskey=n href="Bugs.html#Bugs">Bugs</a>,
+Previous:<a rel=previous accesskey=p href="Conflicts-and-bugs.html#Conflicts%20and%20bugs">Conflicts and bugs</a>,
+Up:<a rel=up accesskey=u href="Conflicts-and-bugs.html#Conflicts%20and%20bugs">Conflicts and bugs</a>
+<hr><br>
+
+<h3>Known conflicts with other packages</h3>
+
+<p>Here is a list of known conflicts of ECB with other packages and
+helpful solutions/hints/workarounds:
+
+<h4>Package avoid.el</h4>
+
+<p>With GNU Emacs 20.X ECB must deactivate <code>mouse-avoidance-mode</code> if the
+option <code>ecb-show-node-info-in-minibuffer</code> activates for at least one
+ECB tree-buffer 'if-too-long or 'always. This is done automatically
+but only as long ECB is activated.
+
+<h4>Package BBDB</h4>
+
+<p>With ECB-version &lt; 1.96 it is not recommended to use BBDB and ECB
+simultaneously in one frame because each of them has its own
+window-management and probably there will be conflicts. Use different
+frames for ECB and BBDB!
+
+<p>But beginning with ECB 1.96 you can use one of the window-managers
+escreen.el or winring.el (see <a href="Window-managers-and-ECB.html#Window-managers%20and%20ECB">Window-managers and ECB</a>). With such
+a window-manager ECB and BBDB should work very well together - even in
+the same frame!
+
+<h4>Package calculator.el</h4>
+
+<p>If the edit-window is already splitted then calling <code>calculator</code> uses
+the whole "other" edit-window for the calculator. With an unsplitted
+edit-window the calculator window has it´s normal size of about 2
+lines. Therefore it´s recommended to set <code>calculator-electric-mode</code>
+during ECB activation to not nil so calculator uses always the
+echo-area instead of creating a new small window!
+
+<h4>Package calendar.el</h4>
+
+<p>With activated ECB <code>calendar</code> does not shrink it´s window to the small
+size but splits the window equally. But if you add this to your
+<code>.emacs</code> it works:
+
+<br><pre>(add-hook 'initial-calendar-window-hook
+          (function (lambda ()
+                      (when (and ecb-minor-mode
+                                 (ecb-point-in-edit-window))
+                        ;; if no horizontal split then nothing
+                        ;; special to do
+                        (or (= (frame-width) (window-width))
+                            (shrink-window (- (window-height) 9))))
+                     )))
+</pre>
+
+<h4>Package cygwin-mount.el</h4>
+
+<p>There can be a conflict between ECB and cygwin-mount.el if the
+following conditions are true:
+
+<ul>
+<li>You are working with cygwin-mount.el (sounds clear :-)
+<li>You have set <code>cygwin-mount-build-mount-table-asynch</code> to not
+nil
+<li>ECB is automatically started after starting Emacs (e.g. with
+<code>ecb-auto-activate</code> or calling <code>ecb-activate</code> in
+<code>window-setup-hook</code>)
+<li>Your Emacs-setup contains a call of <code>cygwin-mount-activate</code>. 
+</ul>
+
+<p>Under these circumstances Emacs 21.X sometimes eats up the whole CPU (at
+least with Windows XP) and the cygwin-mount-table is never build.
+
+<p>But there is an easy work-around: Call <code>cygwin-mount-activate</code>
+first *AFTER* ECB is activated. This can be done with the hook
+<code>ecb-activate-hook</code>:
+
+<br><pre>(add-hook 'ecb-activate-hook
+          (function (lambda ()
+                      (require 'cygwin-mount)
+                      (setq cygwin-mount-build-mount-table-asynch t)
+                      (cygwin-mount-activate))))
+</pre>
+
+<h4>Package escreen.el</h4>
+
+<p>Beginning with version 1.96 ECB supports the window-manager
+escreen.el. See <a href="Window-managers-and-ECB.html#Window-managers%20and%20ECB">Window-managers and ECB</a>.
+
+<h4>Package follow-mouse.el</h4>
+
+<p>The following is only relevant for Emacs 20.X!
+
+<p>ECB works very well with follow-mouse if follow-mouse is turned on
+<strong>BEFORE</strong> ECB is activated (e.g. within the
+<code>ecb-activate-hook</code>). But if you activate follow-mouse first
+after ECB is already activated, then the follow-mouse stuff prevents
+the complete node-name to be displayed in the echo-area if mouse moves
+over it. Because ECB has a much more intelligent mouse tracking
+mechanism than follow-mouse the follow-mouse stuff profit from ECB and
+works even better and saver as without activated ECB!
+
+<h4>Package Gnus (Newsreader)</h4>
+
+<p>With ECB-version &lt; 1.96 it is not recommended to use Gnus and ECB
+simultaneously in one frame because each of them has its own
+window-management and probably there will be conflicts. Use different
+frames for ECB and Gnus!
+
+<p>But beginning with ECB 1.96 you can use one of the window-managers
+escreen.el or winring.el (see <a href="Window-managers-and-ECB.html#Window-managers%20and%20ECB">Window-managers and ECB</a>). With such
+a window-manager ECB and Gnus should work very well together - even in
+the same frame!
+
+<h4>Package JDEE (Java Development Environment)</h4>
+
+<p>JDEE has a lot of "dialogs" where the user can select among several
+choices. An example is importing classes via the command
+<code>jde-import-find-and-import</code>. These dialogs are strongly designed
+to work in an environment where a new temporary window is created, the
+contents of the dialog are displayed in the new window, the user
+select his choice and hits [OK]. After that the new window is deleted
+and the selection is performed (for example the chosen import
+statement are inserted in the source-buffer.
+
+<p>ECB can be work very well with this dialogs but only if no
+<strong>durable</strong> compilation-window is used, i.e. if the option
+<code>ecb-compile-window-height</code> is nil. See <a href="Temp--and-compile-buffers.html#Temp-%20and%20compile-buffers">Temp- and compile-buffers</a>.
+
+<p>If <code>ecb-compile-window-height</code> is not <code>nil</code> then these
+JDEE-dialogs will not work correct!
+
+<h4>Package scroll-all.el (scroll-all-mode)</h4>
+
+<p>ECB advices <code>scroll-all-mode</code> so it is working correct during
+running ECB. This means if point stays in an edit-window and the
+edit-window is splitted then both edit-windows are scrolled by
+<code>scroll-all-mode</code> and no other window! If point stays in any
+other window just this selected window is scrolled. This is the only
+senseful behavior of <code>scroll-all-mode</code> with ECB.
+
+<h4>Package tmm.el (Text mode menubar)</h4>
+
+<p>In general this library does not work perfectly with ECB. But if the
+option <code>ecb-other-window-jump-behavior</code> is not set to <code>all</code>
+then it should work acceptable. Beginning with version 1.95.2 ECB
+ensures autom. that <code>tmm-menubar</code> works - regardless of the value
+of <code>ecb-other-window-jump-behavior</code>.
+
+<h4>Package VC (Version Control)</h4>
+
+<p>The variable <code>vc-delete-logbuf-window</code> must be set to nil during
+active ECB. This can be done with the hooks mentioned in <a href="Elisp-programming.html#Elisp%20programming">Elisp programming</a>.
+
+<h4>Package winner.el (winner-mode)</h4>
+
+<p><code>winner-mode</code> is autom. disabled as long as ECB is running. ECB
+has its own window-management which is completely incompatible with
+<code>winner-mode</code>! But <code>winner-mode</code> makes also not really sense
+with ECB.
+
+<h4>Package winring.el</h4>
+
+<p>Beginning with version 1.96 ECB supports the window-manager
+winring.el. See <a href="Window-managers-and-ECB.html#Window-managers%20and%20ECB">Window-managers and ECB</a>.
+
+</body></html>
+

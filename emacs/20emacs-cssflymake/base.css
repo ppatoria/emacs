@@ -1,0 +1,134 @@
+.whole-page {
+  width: 100%;
+}
+
+.header-zone {
+  font-size: 12px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  color: #101010;
+  background-color: #930000;
+  width: 100%;
+  padding-left: 10px;
+  padding-bottom: 40px;
+  margin: 0px;
+  position: relative;
+}
+
+.image-link {
+  position: absolute;
+  top: 0px;
+}
+
+.zone {
+  width: 100%;
+  position: relative;
+}
+
+.right-zone {
+  min-width: 150px;
+  width: 150px;
+  color: #000;
+  float: left;
+  border-right: 2px solid #000;
+  border-bottom: 2px solid #000;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 20px;
+  padding-bottom: 100px;
+}
+
+.bottom-zone {
+}
+
+.left-zone {
+  float: left;
+  width: 70%;
+  padding-top: 10px;
+  padding-left: 10px;
+  left: 10px;
+}
+
+.text {
+}
+
+.emphasized {
+  font-style: oblique;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.form {
+}
+
+.form-field {
+}
+
+.form-submit {
+}
+
+.readonly-form {
+}
+
+.readonly-form-field {
+}
+
+.table {
+}
+
+.table-caption {
+}
+
+.table-colgroup {
+}
+
+.table-col {
+}
+
+.table-header {
+}
+
+.table-header-cell {
+}
+
+.table-footer {
+}
+
+.table-body {
+}
+
+.table-row {
+}
+
+.table-cell {
+}
+
+.text-field-required {
+  border: double grey;
+}
+
+.text-field-optional {
+}
+
+.password-field-required {
+  border: double grey;
+}
+
+.password-field-optional {
+}
+
+.navigation-element {
+  display: inline;
+}
+
+.navigation-link {
+  display: inline;
+  outline: thin dotted grey;
+}
+
+.dev-text {
+  outline: thin dotted grey;
+  text-weight: bold;
+  background: #ffc;
+}

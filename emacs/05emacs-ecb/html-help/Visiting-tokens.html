@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+<title>ECB - the Emacs Code Browser</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="ECB - the Emacs Code Browser">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Visiting%20tokens">Visiting tokens</a>,
+Next:<a rel=next accesskey=n href="Expanding.html#Expanding">Expanding</a>,
+Previous:<a rel=previous accesskey=p href="The-Methods-buffer.html#The%20Methods%20buffer">The Methods buffer</a>,
+Up:<a rel=up accesskey=u href="The-Methods-buffer.html#The%20Methods%20buffer">The Methods buffer</a>
+<hr><br>
+
+<h4>Possible actions after visiting a token</h4>
+
+<p>You visit a token by clicking with either the primary oder secondary
+mouse-button (or by hitting RET if using the keyboard) onto a node in
+the Methods-tree-buffer of ECB. This simply selects the "right"
+edit-window (depends if clicked with the primary or secondary button
+and if the edit-window is splitted) and puts the point onto the first
+line of the clicked token.
+
+<p>But you can define if after this "basic" token-visit-action more
+additional actions should be performed by ECB. You can either use some
+of the predefined actions (e.g. highlighting the header-line of the
+token) or define own actions. You can set different actions for
+different major-modes. All this is done via the option
+<code>ecb-token-visit-post-actions</code>.
+
+<p>The following actions are currently predefined:
+<ul>
+<li><code>ecb-token-visit-highlight-token-header</code>
+<li><code>ecb-token-visit-smart-token-start</code>
+<li><code>ecb-token-visit-recenter</code>
+<li><code>ecb-token-visit-recenter-top</code>
+<li><code>ecb-token-visit-goto-doc-start</code>
+<li><code>ecb-token-visit-narrow-token</code>
+</ul>
+
+<p>See the documentation of these function for details what they do.
+
+<p>Per default ECB performs the actions
+<code>ecb-token-visit-smart-token-start</code> and
+<code>ecb-token-visit-highlight-token-header</code> for all major-modes.
+
+</body></html>
+

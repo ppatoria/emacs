@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+<title>ECB - the Emacs Code Browser</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="ECB - the Emacs Code Browser">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Expanding">Expanding</a>,
+Next:<a rel=next accesskey=n href="Customizing-the-display.html#Customizing%20the%20display">Customizing the display</a>,
+Previous:<a rel=previous accesskey=p href="Visiting-tokens.html#Visiting%20tokens">Visiting tokens</a>,
+Up:<a rel=up accesskey=u href="The-Methods-buffer.html#The%20Methods%20buffer">The Methods buffer</a>
+<hr><br>
+
+<h4>Explicit and automatic expanding of the ECB-methods-buffer</h4>
+
+<h5>Explicit expanding to a certain expanding level</h5>
+
+<p>With the command <code>ecb-expand-methods-nodes</code> (bound to <kbd>C-c . 
+x</kbd>) you can get a fast overlook of the contents of the source-buffer,
+because this command allows precisely expanding tokens with a certain
+indentation-level. So you can either expand no tokens (or with other
+words collapse all tokens) or expand all tokens so see the contents of
+a buffer at one glance. Or you can expand exactly that tokens of a
+certain indentation level.
+
+<p>Which node-types are expanded (rsp. collapsed) by this command
+depends for semantic-sources on the options
+<code>ecb-methods-nodes-expand-spec</code> and
+<code>ecb-methods-nodes-collapse-spec</code>! For non-semantic-sources always
+all node-types are expanded/collapsed, i.e. the two options above
+takes no effect for these files.
+
+<h5>Automatic expanding the ECB-methods-buffer</h5>
+
+<p>If the option <code>ecb-highlight-token-with-point</code> is switched on,
+then then always that node in the method-buffer is highlighted which
+belongs to the current semantic-token under point in the edit-window. 
+But if this node is invisible (probably because its parent node is
+collapsed) then no node is highlighted if the auto. expanding feature
+is switched off.
+
+<p>You can either switch on this feature with the option
+<code>ecb-auto-expand-token-tree</code> or even easier with the command
+<code>ecb-toggle-auto-expand-token-tree</code>.
+
+<p>There is another option
+<code>ecb-expand-methods-switch-off-auto-expand</code> which makes both
+explicit and auto. expanding best working together. See the
+documentation of this option to get the details.
+
+<p>The autom. expanding feature is only available for semantic-sources!
+
+</body></html>
+

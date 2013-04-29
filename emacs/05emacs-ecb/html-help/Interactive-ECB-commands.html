@@ -1,0 +1,998 @@
+<html lang="en">
+<head>
+<title>ECB - the Emacs Code Browser</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="ECB - the Emacs Code Browser">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="Interactive%20ECB%20commands">Interactive ECB commands</a>,
+Previous:<a rel=previous accesskey=p href="ECB-window-synchronizing.html#ECB-window%20synchronizing">ECB-window synchronizing</a>,
+Up:<a rel=up accesskey=u href="Usage-of-ECB.html#Usage%20of%20ECB">Usage of ECB</a>
+<hr><br>
+
+<h3>Interactive ECB commands</h3>
+
+<p>ECB offers a lot of interactive commands. Some of these commands
+prompt the user in the minibuffer if called with a prefix argument.
+
+<p>Example: If <code>ecb-clear-history</code> is called with a prefix argument
+then you will be prompted in the minibuffer with:
+
+<br><pre>Clear from history: [all, not-existing-buffers, existing-buffers]
+</pre>
+
+<p>You can choose one of the options enclosed in brackets with
+TAB-completion; hitting RET direct after the prompt chooses auto. the
+first offered option (in the example above "all").
+
+<p><strong>Please note</strong>: The following interactive commands of ECB are
+listed without the prefix "ecb-" (e.g. the command
+<code>ecb-activate</code> is listed with name "activate"). This has been
+done for a better readable command index. See <a href="Command-Index.html#Command%20Index">Command Index</a>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>activate</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Activates ECB and creates the special buffers for the choosen layout. 
+For the layout see <code>ecb-layout-name</code>. This function raises always
+the ECB-frame if called from another frame. This is the same as
+calling <code>ecb-minor-mode</code> with a positive argument. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>add-all-buffers-to-history</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Add all current file-buffers to the history-buffer of ECB. If
+<code>ecb-sort-history-items</code> is not nil then afterwards the history
+is sorted alphabetically. Otherwise the most recently used buffers are
+on the top of the history and the seldom used buffers at the bottom. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>change-layout</b><i> &amp;optional preselect-type
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Select a layout-name from all current available layouts
+(TAB-completion is offered) and change the layout to the selected
+layout-name. If optional argument PRESELECT-TYPE is not nil then you
+can preselect a layout-type \(TAB-completion is offered too) and then
+you will be asked only for layouts of that preselected type. Note:
+This function works by changing the option <code>ecb-layout-name</code> but
+only for current Emacs-session. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>clear-history</b><i> &amp;optional clearall
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Clears the ECB history-buffer. If <var>CLEARALL</var> is <code>nil</code> then
+the behavior is defined in the option
+<code>ecb-clear-history-behavior</code> otherwise the user is prompted what
+buffers should be cleared from the history-buffer. For further
+explanation see <code>ecb-clear-history-behavior</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>create-new-layout</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Start process for interactively creating a new ECB-layout
+(see <a href="Creating-a-new-ECB-layout.html#Creating%20a%20new%20ECB-layout">Creating a new ECB-layout</a>). 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>cycle-maximized-ecb-buffers</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Cycles through all ecb-buffers of current layout by maximizing exactly
+one of the ecb-windows after every cycle-step. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>cycle-through-compilation-buffers</b><i> &amp;optional choose-buffer
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Cycle through all compilation buffers currently open and display them
+within the compilation window <code>ecb-compile-window</code>. If the
+currently opened buffer within the compilation window is not a
+compilation buffer, we jump to the first compilation buffer. If not we
+try to loop through all compilation buffers. If we hit the end we go
+back to the beginning.
+
+<p>If <var>CHOOSE-BUFFER</var> is not <code>nil</code> then the user will be
+prompted for the compilation-buffer to switch to. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>deactivate</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Deactivates the ECB and kills all ECB buffers and windows. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>delete-new-layout</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Select a layout-name for a layout created by
+<code>ecb-create-new-layout</code> and delete this layout. This means the
+layout-definition is removed from the file
+<code>ecb-create-layout-file</code> and the layout-function and associated
+aliases are unbound. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>display-upgraded-options</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Display a message-buffer which options have been upgraded or reset. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>download-ecb</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Download ECB from the ECB-website and install it. For this the option
+<code>ecb-download-url</code> must be set correct, whereas the default value of
+this option should always be correct.
+
+<p>If <code>ecb-download-package-version-type</code> is set to -1 (means asking
+for a version) then you will be ask in the minibuffer for the version
+to download. Otherwise ECB downloads autom. the latest version
+available for the type specified in
+<code>ecb-download-package-version-type</code>. If no newer version than the
+current one is available no download will be done.
+
+<p>For details about downloading and what requirements must be satisfied
+see function <code>ecb-package-download</code> and option
+<code>ecb-download-package-version-type</code>!
+
+<p>After successful downloading the new ECB will be installed in a
+subdirectory of <code>ecb-download-install-parent-dir</code>. After adding
+this subdirectory to <code>load-path</code> and restarting Emacs the new ECB
+version can be activated by <code>ecb-activate</code>.
+
+<p>If current running ECB is installed as regular XEmacs-package and not
+with the archive available at the ECB website then this function asks
+for proceeding! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>download-semantic</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Download semantic from the semantic-website and install it. For this
+the variable <code>ecb-cedet-url</code> must be set correct,
+whereas the default value of this variable should always be correct.
+
+<p>If <code>ecb-download-package-version-type</code> is set to -1 (means asking
+for a version) then you will be ask in the minibuffer for the version
+to download. Otherwise ECB downloads autom. the latest version
+available for the type specified in
+<code>ecb-download-package-version-type</code>. If no newer version than the
+current one is available no download will be done.
+
+<p>For details about downloading and what requirements must be satisfied
+see function <code>ecb-package-download</code> and option
+<code>ecb-download-package-version-type</code>!
+
+<p>After successful downloading the new semantic will be installed in a
+subdirectory of <code>ecb-download-install-parent-dir</code>. After adding
+this new subdirectory to <code>load-path</code> and restarting Emacs the new
+semantic version is loaded and is used after next start of ECB.
+
+<p>If current running semantic is installed as regular XEmacs-package and
+not with the archive available at the semantic website then this
+function asks for proceeding! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>expand-methods-nodes</b><i> &amp;optional force-all
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Set the expand level of the nodes in the ECB-methods-buffer.
+
+<p>This command asks in the minibuffer for an indentation level LEVEL. With this
+LEVEL you can precisely specify which level of nodes should be expanded. LEVEL
+means the indentation-level of the nodes.
+
+<p>A LEVEL value X means that all nodes with an indentation-level &lt;= X are
+expanded and all other are collapsed. A negative LEVEL value means all visible
+nodes are collapsed.
+
+<p>Nodes which are not indented have indentation-level 0!
+
+<p>Which node-types are expanded (rsp. collapsed) by this command
+depends on the options <code>ecb-methods-nodes-expand-spec</code> and
+<code>ecb-methods-nodes-collapse-spec</code>! With optional argument
+<var>FORCE-ALL</var> all tokens will be expanded/collapsed regardless of
+the values of these options.
+
+<p>Examples:
+<ul>
+<li>LEVEL = 0
+expands only nodes which have no indentation itself. 
+<li>LEVEL = 2
+expands nodes which are either not indented or indented indented once
+or twice
+<li>LEVEL ~ 10
+should normally expand all nodes expect there are nodes which are
+indented deeper than 10. 
+</ul>
+
+<p>Note 1: This command switches off auto. expanding of the method-buffer
+if <code>ecb-expand-methods-switch-off-auto-expand</code> is not nil. But it
+can be switched on again quickly with
+<code>ecb-toggle-auto-expand-token-tree</code> or <kbd>[C-c . a]</kbd>.
+
+<p>Note 2: All this is only valid for file-types parsed by semantic. For
+other file types which are parsed by imenu or etags (see
+<code>ecb-process-non-semantic-files</code>) <var>FORCE-ALL</var> is always true! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>eshell-current-buffer-sync</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Synchronize the eshell with the directory of current source-buffer. 
+This is only done if the eshell is currently visible in the
+compile-window of ECB and if either this function is called
+interactively or <code>ecb-eshell-synchronize</code> is not nil. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>eshell-recenter</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Recenter the eshell window so that the prompt is at the buffer-end. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>expand-directory-nodes</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Set the expand level of the nodes in the ECB-directories-buffer. For
+argument LEVEL see <code>ecb-expand-methods-nodes</code>.
+
+<p>Be aware that for deep structured paths and a lot of source-paths this
+command can last a long time - depending of machine- and
+disk-performance. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>goto-window-compilation</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Goto the ecb compilation window <code>ecb-compile-window</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>goto-window-directories</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Make the ECB-directories window the current window. If
+<code>ecb-use-speedbar-instead-native-tree-buffer</code> is <code>dir</code> then
+goto to the speedbar-window. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>goto-window-edit1</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Make the (first) edit-window window the current window. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>goto-window-edit2</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Make the second edit-window (if available) window the current window. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>goto-window-history</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Make the ECB-history window the current window. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>goto-window-methods</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Make the ECB-methods window the current window. If
+<code>ecb-use-speedbar-instead-native-tree-buffer</code> is <code>method</code>
+then goto to the speedbar-window. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>goto-window-sources</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Make the ECB-sources window the current window. If
+<code>ecb-use-speedbar-instead-native-tree-buffer</code> is <code>source</code>
+then goto to the speedbar-window. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>jde-display-class-at-point</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Display in the ECB-methods-buffer the contents (methods, attributes
+etc...) of the class which contains the definition of the "thing"
+under point (this can be a variable-name, class-name, method-name,
+attribute-name). This function needs the same requirements to work as
+the method-completion feature of JDEE (see
+<code>jde-complete</code>)!. The source-file is searched first in
+<code>jde-sourcepath</code>, then in <code>jde-global-classpath</code>, then in
+<var>$CLASSPATH</var>, then in current-directory.
+
+<p>Works only for classes where the source-code (i.e. the *.java-file) is
+available. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>maximize-window-directories</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Maximize the ECB-directories-window, i.e. delete all other
+ECB-windows, so only one ECB-window and the edit-window(s) are visible
+(and maybe a compile-window). Works also if the ECB-directories-window
+is not visible in current layout. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>maximize-window-sources</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Maximize the ECB-sources-window, i.e. delete all other ECB-windows, so
+only one ECB-window and the edit-window(s) are visible (and maybe a
+compile-window). Works also if the ECB-sources-window is not visible
+in current layout. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>maximize-window-methods</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Maximize the ECB-methods-window, i.e. delete all other ECB-windows, so
+only one ECB-window and the edit-window(s) are visible (and maybe a
+compile-window). Works also if the ECB-methods-window is not visible
+in current layout. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>maximize-window-history</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Maximize the ECB-history-window, i.e. delete all other ECB-windows, so
+only one ECB-window and the edit-window(s) are visible (and maybe a
+compile-window). Works also if the ECB-history-window is not visible
+in current layout. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>maximize-window-speedbar</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Maximize the ECB-speedbar-window, i.e. delete all other ECB-windows,
+so only one ECB-window and the edit-window(s) are visible (and maybe a
+compile-window). Does nothing if the speedbar-window is not visible
+within the ECB-frame. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>minor-mode</b><i> &amp;optional arg
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Toggle ECB minor mode. With prefix argument <var>ARG</var>, turn on if
+positive, otherwise off. Return non-<code>nil</code> if the minor mode is
+enabled. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>nav-goto-previous</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Go backward in the navigation history-list, see <a href="Back-forward-navigation.html#Back%2fforward%20navigation">Back/forward navigation</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>nav-goto-next</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Go forward in the navigation history-list, see <a href="Back-forward-navigation.html#Back%2fforward%20navigation">Back/forward navigation</a>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>rebuild-methods-buffer</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Updates the methods buffer with the current buffer after deleting the
+complete previous parser-information, means no semantic-cache is used! 
+Point must stay in an edit-window otherwise nothing is done. This
+method is merely needed for semantic parsed buffers if semantic parses
+not the whole buffer because it reaches a not parse-able code or for
+buffers not supported by semantic but by imenu or etags.
+
+<p>Examples when a call to this function can be necessary:
+
+<ul>
+<li>If an Elisp-file is parsed which contains in the middle a defun X
+where the closing ) is missing then semantic parses only until this
+defun X is reached and you will get an incomplete ECB-method buffer. 
+In such a case you must complete the defun X and then call this
+function to completely reparse the Elisp-file and rebuild the ECB
+method buffer!
+
+<li>For not semantic supported buffers which can be parsed by imenu or
+etags (see <code>ecb-process-non-semantic-files</code>) because for these
+buffers there is no built-in auto-rebuild mechanism. For these buffers
+this command calls <code>ecb-rebuild-methods-buffer-for-non-semantic</code>. 
+</ul>
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>redraw-layout</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Redraw the ECB screen. If the variable <code>ecb-redraw-layout-quickly</code> is
+not nil then the redraw is done by the <code>ecb-redraw-layout-quickly</code>
+function, otherwise by <code>ecb-redraw-layout-full</code>. But it's strongly
+recommended to use the quick redraw only if you have really slow
+machines where a full redraw takes several seconds because the quick
+redraw is not really safe and may have some drawbacks! On normal
+machines the full drawback should be done in &lt;&lt; 1s! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>restore-default-window-sizes</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Resets the sizes of the ECB windows to their default values. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>restore-window-sizes</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Sets the sizes of the ECB windows to their stored values. See option
+<code>ecb-layout-window-sizes</code> and command
+<code>ecb-store-window-sizes</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>show-help</b><i> &amp;optional format
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Shows the online help of ECB either in Info or in HTML format
+depending of the value of <code>ecb-show-help-format</code>. If called with
+prefix argument, i.e. if <var>FORMAT</var> is not nil then the user is
+prompted to choose the format of the help (Info or HTML). If an error
+about not finding the needed help-file occurs please take a look at
+the options <code>ecb-help-info-start-file</code> and
+<code>ecb-help-html-start-file</code>!
+
+<p>Note: If you got ECB as a standard XEmacs-package maybe the
+HTML-online-documentation is not included. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>show-layout-help</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Select a name of a layout and shows the documentation of the
+associated layout-function. At least for the built-in layouts the
+documentation contains a picture of the outline of the chosen layout. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>show-tip-of-the-day</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Show tip of the day if <code>ecb-tip-of-the-day</code> is not nil or if
+called interactively. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>store-window-sizes</b><i> &amp;optional fix
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Stores the sizes of the ECB windows for the current layout. The size
+of the ECB windows will be set to their stored values when
+<code>ecb-redraw-layout</code> or <code>ecb-restore-window-sizes</code> is called. 
+To reset the window sizes to their default values call
+<code>ecb-restore-default-window-sizes</code>. Please read also the
+documentation of <code>ecb-layout-window-sizes</code>!
+
+<p>The windows sizes are stored per default as fractions of current
+frame-width and -height of the ecb-frame, so the stored values will
+"work" for other frame sizes too. But if <var>FIX</var> is not nil (means
+called with a prefix argument) then the fixed values of current width
+and height are stored! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>submit-problem-report</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Submit a problem report for the ECB to the ECB mailing-list. This
+command generates in the edit-window a problem-report which contains
+already the current values of all ECB options, the current
+backtrace-buffer if there is any and the current message-buffer. You
+will be asked for a problem-report subject and then you must insert a
+description of the problem. Please describe the problem as detailed as
+possible! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>toggle-auto-expand-token-tree</b><i> &amp;optional arg
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Toggle auto expanding of the ECB-methods-buffer. With prefix argument
+<var>ARG</var>, make switch on if positive, otherwise switch off. If the
+effect is that auto-expanding is switched off then the current value
+of <code>ecb-auto-expand-token-tree</code> is saved so it can be used for
+the next switch on by this command. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>toggle-compile-window</b><i> &amp;optional arg
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Toggle the visibility of the compile-window of ECB. With prefix
+argument <var>ARG</var>, make visible if positive, otherwise invisible. The
+height of the compile-window is always the current <strong>saved</strong> (for
+future sessions) value of <code>ecb-compile-window-height</code>, i.e. this
+command can only display a compile-window if
+<code>ecb-compile-window-height</code> has such a saved value of not
+<code>nil</code>! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>toggle-compile-window-height</b><i> &amp;optional arg
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Toggle whether the <code>ecb-compile-window</code> is enlarged or not. If
+<var>ARG</var> &gt; 0 then shrink or enlarge the the compile-window according
+to the value of <code>ecb-enlarged-compilation-window-max-height</code>. But
+never shrink below the value of <code>ecb-compile-window-height</code>. If
+<var>ARG</var> &lt;= 0 then shrink <code>ecb-compile-window</code> to
+<code>ecb-compile-window-height</code> and if <var>ARG</var> is nil then toggle
+the enlarge-state. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>toggle-ecb-windows</b><i> &amp;optional arg
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Toggle visibility of the ECB-windows. With prefix argument <var>ARG</var>,
+make visible if positive, otherwise invisible. This has nothing to do
+with (de)activating ECB but only affects the visibility of the ECB
+windows. ECB minor mode remains active! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>toggle-layout</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Toggles between the layouts defined in
+<code>ecb-toggle-layout-sequence</code> (See also option
+<code>ecb-show-sources-in-directories-buffer</code>). Note: This function
+works by changing the options <code>ecb-layout-name</code> but only for
+current Emacs-session. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>toggle-window-sync</b><i> &amp;optional arg
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Toggle auto synchronizing of the ECB-windows. With prefix argument
+<var>ARG</var>, switch on if positive, otherwise switch off. If the effect
+is that auto-synchronizing is switched off then the current value of
+the option <code>ecb-window-sync</code> is saved so it can be used for the
+next switch on by this command. See also the option
+<code>ecb-window-sync</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>update-directories-buffer</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Updates the ECB directories buffer. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>upgrade-options</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Check for all ECB-options if their current value is compatible to the
+defined type. If not upgrade it to the new type or reset it to the
+default-value of current ECB. Try also to upgrade renamed options. 
+Displays all upgraded or reset options with their old (before the
+upgrade/reset) and new values. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>window-sync</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Synchronizes all special ECB-buffers with current buffer.
+
+<p>Depending on the contents of current buffer this command performs different
+synchronizing tasks but only if ECB is active and point stays in an
+edit-window.
+
+<ul>
+<li>If current buffer is a file-buffer then all special ECB-tree-buffers are
+synchronized with current buffer.
+
+<li>If current buffer is a dired-buffer then the directory- and
+the sources-tree-buffer are synchronized if visible
+</ul>
+
+<p>In addition to this the hooks in <code>ecb-current-buffer-sync-hook</code>
+run. 
+</td></tr>
+</table>
+
+<p>Most of these functions are also available via the menu "ECB" and
+also via the ECB key-map with prefix <kbd>C-c .</kbd> (see
+<code>ecb-minor-mode</code> for a complete list of the keybindings).
+
+</body></html>
+

@@ -1,0 +1,129 @@
+<html lang="en">
+<head>
+<title>ECB - the Emacs Code Browser</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="ECB - the Emacs Code Browser">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="ecb-faces">ecb-faces</a>,
+Next:<a rel=next accesskey=n href="ecb-download.html#ecb-download">ecb-download</a>,
+Previous:<a rel=previous accesskey=p href="ecb-face-options.html#ecb-face-options">ecb-face-options</a>,
+Up:<a rel=up accesskey=u href="Customizable-options.html#Customizable%20options">Customizable options</a>
+<hr><br>
+
+<h4>Group ecb-faces</h4>
+
+<p>This group contains the following faces:
+
+<dl>
+<dt><code>ecb-bucket-token-face:</code>
+<dd>Face which can be used for displaying bucket tokens in the methods
+buffer. See also `ecb-bucket-token-display'.
+
+<br><dt><code>ecb-default-general-face:</code>
+<dd>Basic face for all ECB tree-buffers. 
+It's recommended to define here the font-family, the font-size, the basic
+color etc.
+
+<p>In GNU Emacs 21.X all faces (even the face
+<code>ecb-default-highlight-face</code>) used in the ECB tree-buffers inherit
+from this face. Therefore the default attributes like font etc. of a
+face used in a tree-buffer can be very easily changed with face
+<code>ecb-default-general-face</code>.
+
+<p>With XEmacs and GNU Emacs 20.X there is no inheritance-feature but the
+options <code>ecb-directories-general-face</code>,
+<code>ecb-sources-general-face</code>, <code>ecb-methods-general-face</code> and
+<code>ecb-history-general-face</code> offer the choice to use the face
+<code>ecb-default-general-face</code> so also with XEmacs and GNU Emacs 20.X
+the basic face-settings can be easily changed just by customizing the
+face <code>ecb-default-general-face</code>!
+
+<br><dt><code>ecb-default-highlight-face:</code>
+<dd>Define basic face for highlighting the selected node in an ECB
+tree-buffer.
+
+<p>In GNU Emacs 21.X all highlighting faces in the ECB tree-buffers
+inherit from this face. Therefore the default attributes like font
+etc. of a face used in a tree-buffer for highlighting the current
+token can be very easily changed with face
+<code>ecb-default-highlight-face</code>.
+
+<p>With XEmacs and GNU Emacs 20.X there is no inheritance-feature but the
+options <code>ecb-directory-face</code>, <code>ecb-source-face</code>,
+<code>ecb-method-face</code> and <code>ecb-history-face</code> offer the choice to
+use the face <code>ecb-default-highlight-face</code> so also with XEmacs and
+GNU Emacs 20.X the basic face-settings can be easily changed just by
+customizing the face <code>ecb-default-highlight-face</code>!
+
+<br><dt><code>ecb-directories-general-face:</code>
+<dd>Basic face for the ECB directories buffer. It큦 recommended to define
+here the font-family, the font-size, the basic color etc.
+
+<br><dt><code>ecb-directory-face:</code>
+<dd>Define face used for highlighting current directory in the directories
+buffer.
+
+<br><dt><code>ecb-history-face:</code>
+<dd>Define face used for highlighting current history-entry in the history
+buffer.
+
+<br><dt><code>ecb-history-general-face:</code>
+<dd>Basic face for the ECB history buffer. It큦 recommended to define here
+the font-family, the font-size, the basic color etc.
+
+<br><dt><code>ecb-method-face:</code>
+<dd>Define face used for highlighting current method, class or variable in
+the methods buffer.
+
+<br><dt><code>ecb-methods-general-face:</code>
+<dd>Basic face for the ECB methods buffer. It큦 recommended to define here
+the font-family, the font-size, the basic color etc.
+
+<br><dt><code>ecb-method-non-semantic-face:</code>
+<dd>Define face used for displaying tokens of sources not supported by semantic.
+
+<br><dt><code>ecb-source-face:</code>
+<dd>Define face used for highlighting current source in the sources
+buffer.
+
+<br><dt><code>ecb-source-in-directories-buffer-face:</code>
+<dd>Define a face for displaying sources in the directories buffer.
+
+<br><dt><code>ecb-sources-general-face:</code>
+<dd>Basic face for the ECB sources buffer. It큦 recommended to define here
+the font-family, the font-size, the basic color etc.
+
+<br><dt><code>ecb-token-header-face:</code>
+<dd>Define face used for highlighting the token header after jumping to it
+by clicking onto a node in the methods buffer.
+
+<br><dt><code>ecb-type-token-class-face:</code>
+<dd>Define face used with option <code>ecb-type-token-display</code>.
+
+<br><dt><code>ecb-type-token-enum-face:</code>
+<dd>Define face used with option <code>ecb-type-token-display</code>.
+
+<br><dt><code>ecb-type-token-group-face:</code>
+<dd>Define face used with option <code>ecb-type-token-display</code>.
+
+<br><dt><code>ecb-type-token-interface-face:</code>
+<dd>Define face used with option <code>ecb-type-token-display</code>.
+
+<br><dt><code>ecb-type-token-struct-face:</code>
+<dd>Define face used with option <code>ecb-type-token-display</code>.
+
+<br><dt><code>ecb-type-token-typedef-face:</code>
+<dd>Define face used with option <code>ecb-type-token-display</code>.
+
+</dl>
+
+<p>Just call <code>customize-face &lt;face-name&gt;</code> to customize these faces
+for your personal taste. Or customize the related option in the group
+<a href="ecb-face-options.html#ecb-face-options">ecb-face-options</a>.
+
+</body></html>
+

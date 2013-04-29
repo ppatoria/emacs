@@ -1,0 +1,590 @@
+This is ecb.info, produced by makeinfo version 4.2 from ecb.texi.
+
+INFO-DIR-SECTION GNU Emacs Lisp
+START-INFO-DIR-ENTRY
+* ECB: (ecb).           Emacs Code Browser
+END-INFO-DIR-ENTRY
+
+
+File: ecb.info,  Node: Interactive ECB commands,  Prev: ECB-window synchronizing,  Up: Usage of ECB
+
+Interactive ECB commands
+========================
+
+ECB offers a lot of interactive commands. Some of these commands prompt the
+user in the minibuffer if called with a prefix argument.
+
+Example: If `ecb-clear-history' is called with a prefix argument then you
+will be prompted in the minibuffer with:
+
+   Clear from history: [all, not-existing-buffers, existing-buffers]
+
+You can choose one of the options enclosed in brackets with TAB-completion;
+hitting RET direct after the prompt chooses auto. the first offered option
+(in the example above "all").
+
+*Please note*: The following interactive commands of ECB are listed without
+the prefix "ecb-" (e.g. the command `ecb-activate' is listed with name
+"activate"). This has been done for a better readable command index. *Note
+Command Index::.
+
+ - Command: activate
+   Activates ECB and creates the special buffers for the choosen layout.  For
+   the layout see `ecb-layout-name'. This function raises always the
+   ECB-frame if called from another frame. This is the same as calling
+   `ecb-minor-mode' with a positive argument.
+
+ - Command: add-all-buffers-to-history
+   Add all current file-buffers to the history-buffer of ECB. If
+   `ecb-sort-history-items' is not nil then afterwards the history is sorted
+   alphabetically. Otherwise the most recently used buffers are on the top of
+   the history and the seldom used buffers at the bottom.
+
+ - Command: change-layout &optional preselect-type
+   Select a layout-name from all current available layouts (TAB-completion is
+   offered) and change the layout to the selected layout-name. If optional
+   argument PRESELECT-TYPE is not nil then you can preselect a layout-type
+   \(TAB-completion is offered too) and then you will be asked only for
+   layouts of that preselected type. Note: This function works by changing
+   the option `ecb-layout-name' but only for current Emacs-session.
+
+ - Command: clear-history &optional clearall
+   Clears the ECB history-buffer. If CLEARALL is `nil' then the behavior is
+   defined in the option `ecb-clear-history-behavior' otherwise the user is
+   prompted what buffers should be cleared from the history-buffer. For
+   further explanation see `ecb-clear-history-behavior'.
+
+ - Command: create-new-layout
+   Start process for interactively creating a new ECB-layout (*note Creating
+   a new ECB-layout::).
+
+ - Command: cycle-maximized-ecb-buffers
+   Cycles through all ecb-buffers of current layout by maximizing exactly one
+   of the ecb-windows after every cycle-step.
+
+ - Command: cycle-through-compilation-buffers &optional choose-buffer
+   Cycle through all compilation buffers currently open and display them
+   within the compilation window `ecb-compile-window'. If the currently
+   opened buffer within the compilation window is not a compilation buffer,
+   we jump to the first compilation buffer. If not we try to loop through all
+   compilation buffers. If we hit the end we go back to the beginning.
+
+   If CHOOSE-BUFFER is not `nil' then the user will be prompted for the
+   compilation-buffer to switch to.
+
+ - Command: deactivate
+   Deactivates the ECB and kills all ECB buffers and windows.
+
+ - Command: delete-new-layout
+   Select a layout-name for a layout created by `ecb-create-new-layout' and
+   delete this layout. This means the layout-definition is removed from the
+   file `ecb-create-layout-file' and the layout-function and associated
+   aliases are unbound.
+
+ - Command: display-upgraded-options
+   Display a message-buffer which options have been upgraded or reset.
+
+ - Command: download-ecb
+   Download ECB from the ECB-website and install it. For this the option
+   `ecb-download-url' must be set correct, whereas the default value of this
+   option should always be correct.
+
+   If `ecb-download-package-version-type' is set to -1 (means asking for a
+   version) then you will be ask in the minibuffer for the version to
+   download. Otherwise ECB downloads autom. the latest version available for
+   the type specified in `ecb-download-package-version-type'. If no newer
+   version than the current one is available no download will be done.
+
+   For details about downloading and what requirements must be satisfied see
+   function `ecb-package-download' and option
+   `ecb-download-package-version-type'!
+
+   After successful downloading the new ECB will be installed in a
+   subdirectory of `ecb-download-install-parent-dir'. After adding this
+   subdirectory to `load-path' and restarting Emacs the new ECB version can
+   be activated by `ecb-activate'.
+
+   If current running ECB is installed as regular XEmacs-package and not with
+   the archive available at the ECB website then this function asks for
+   proceeding!
+
+ - Command: download-semantic
+   Download semantic from the semantic-website and install it. For this the
+   variable `ecb-cedet-url' must be set correct, whereas the default value of
+   this variable should always be correct.
+
+   If `ecb-download-package-version-type' is set to -1 (means asking for a
+   version) then you will be ask in the minibuffer for the version to
+   download. Otherwise ECB downloads autom. the latest version available for
+   the type specified in `ecb-download-package-version-type'. If no newer
+   version than the current one is available no download will be done.
+
+   For details about downloading and what requirements must be satisfied see
+   function `ecb-package-download' and option
+   `ecb-download-package-version-type'!
+
+   After successful downloading the new semantic will be installed in a
+   subdirectory of `ecb-download-install-parent-dir'. After adding this new
+   subdirectory to `load-path' and restarting Emacs the new semantic version
+   is loaded and is used after next start of ECB.
+
+   If current running semantic is installed as regular XEmacs-package and not
+   with the archive available at the semantic website then this function asks
+   for proceeding!
+
+ - Command: expand-methods-nodes &optional force-all
+   Set the expand level of the nodes in the ECB-methods-buffer.
+
+   This command asks in the minibuffer for an indentation level LEVEL. With
+   this LEVEL you can precisely specify which level of nodes should be
+   expanded. LEVEL means the indentation-level of the nodes.
+
+   A LEVEL value X means that all nodes with an indentation-level <= X are
+   expanded and all other are collapsed. A negative LEVEL value means all
+   visible nodes are collapsed.
+
+   Nodes which are not indented have indentation-level 0!
+
+   Which node-types are expanded (rsp. collapsed) by this command depends on
+   the options `ecb-methods-nodes-expand-spec' and
+   `ecb-methods-nodes-collapse-spec'! With optional argument FORCE-ALL all
+   tokens will be expanded/collapsed regardless of the values of these
+   options.
+
+   Examples:
+    - LEVEL = 0 expands only nodes which have no indentation itself.
+
+    - LEVEL = 2 expands nodes which are either not indented or indented
+      indented once or twice
+
+    - LEVEL ~ 10 should normally expand all nodes expect there are nodes
+      which are indented deeper than 10.
+
+   Note 1: This command switches off auto. expanding of the method-buffer if
+   `ecb-expand-methods-switch-off-auto-expand' is not nil. But it can be
+   switched on again quickly with `ecb-toggle-auto-expand-token-tree' or
+   `[C-c . a]'.
+
+   Note 2: All this is only valid for file-types parsed by semantic. For
+   other file types which are parsed by imenu or etags (see
+   `ecb-process-non-semantic-files') FORCE-ALL is always true!
+
+ - Command: eshell-current-buffer-sync
+   Synchronize the eshell with the directory of current source-buffer.  This
+   is only done if the eshell is currently visible in the compile-window of
+   ECB and if either this function is called interactively or
+   `ecb-eshell-synchronize' is not nil.
+
+ - Command: eshell-recenter
+   Recenter the eshell window so that the prompt is at the buffer-end.
+
+ - Command: expand-directory-nodes
+   Set the expand level of the nodes in the ECB-directories-buffer. For
+   argument LEVEL see `ecb-expand-methods-nodes'.
+
+   Be aware that for deep structured paths and a lot of source-paths this
+   command can last a long time - depending of machine- and disk-performance.
+
+ - Command: goto-window-compilation
+   Goto the ecb compilation window `ecb-compile-window'.
+
+ - Command: goto-window-directories
+   Make the ECB-directories window the current window. If
+   `ecb-use-speedbar-instead-native-tree-buffer' is `dir' then goto to the
+   speedbar-window.
+
+ - Command: goto-window-edit1
+   Make the (first) edit-window window the current window.
+
+ - Command: goto-window-edit2
+   Make the second edit-window (if available) window the current window.
+
+ - Command: goto-window-history
+   Make the ECB-history window the current window.
+
+ - Command: goto-window-methods
+   Make the ECB-methods window the current window. If
+   `ecb-use-speedbar-instead-native-tree-buffer' is `method' then goto to the
+   speedbar-window.
+
+ - Command: goto-window-sources
+   Make the ECB-sources window the current window. If
+   `ecb-use-speedbar-instead-native-tree-buffer' is `source' then goto to the
+   speedbar-window.
+
+ - Command: jde-display-class-at-point
+   Display in the ECB-methods-buffer the contents (methods, attributes
+   etc...) of the class which contains the definition of the "thing" under
+   point (this can be a variable-name, class-name, method-name,
+   attribute-name). This function needs the same requirements to work as the
+   method-completion feature of JDEE (see `jde-complete')!. The source-file
+   is searched first in `jde-sourcepath', then in `jde-global-classpath',
+   then in $CLASSPATH, then in current-directory.
+
+   Works only for classes where the source-code (i.e. the *.java-file) is
+   available.
+
+ - Command: maximize-window-directories
+   Maximize the ECB-directories-window, i.e. delete all other ECB-windows, so
+   only one ECB-window and the edit-window(s) are visible (and maybe a
+   compile-window). Works also if the ECB-directories-window is not visible
+   in current layout.
+
+ - Command: maximize-window-sources
+   Maximize the ECB-sources-window, i.e. delete all other ECB-windows, so
+   only one ECB-window and the edit-window(s) are visible (and maybe a
+   compile-window). Works also if the ECB-sources-window is not visible in
+   current layout.
+
+ - Command: maximize-window-methods
+   Maximize the ECB-methods-window, i.e. delete all other ECB-windows, so
+   only one ECB-window and the edit-window(s) are visible (and maybe a
+   compile-window). Works also if the ECB-methods-window is not visible in
+   current layout.
+
+ - Command: maximize-window-history
+   Maximize the ECB-history-window, i.e. delete all other ECB-windows, so
+   only one ECB-window and the edit-window(s) are visible (and maybe a
+   compile-window). Works also if the ECB-history-window is not visible in
+   current layout.
+
+ - Command: maximize-window-speedbar
+   Maximize the ECB-speedbar-window, i.e. delete all other ECB-windows, so
+   only one ECB-window and the edit-window(s) are visible (and maybe a
+   compile-window). Does nothing if the speedbar-window is not visible within
+   the ECB-frame.
+
+ - Command: minor-mode &optional arg
+   Toggle ECB minor mode. With prefix argument ARG, turn on if positive,
+   otherwise off. Return non-`nil' if the minor mode is enabled.
+
+ - Command: nav-goto-previous
+   Go backward in the navigation history-list, see *Note Back/forward
+   navigation::.
+
+ - Command: nav-goto-next
+   Go forward in the navigation history-list, see *Note Back/forward
+   navigation::.
+
+ - Command: rebuild-methods-buffer
+   Updates the methods buffer with the current buffer after deleting the
+   complete previous parser-information, means no semantic-cache is used!
+   Point must stay in an edit-window otherwise nothing is done. This method
+   is merely needed for semantic parsed buffers if semantic parses not the
+   whole buffer because it reaches a not parse-able code or for buffers not
+   supported by semantic but by imenu or etags.
+
+   Examples when a call to this function can be necessary:
+
+    * If an Elisp-file is parsed which contains in the middle a defun X where
+      the closing ) is missing then semantic parses only until this defun X
+      is reached and you will get an incomplete ECB-method buffer.  In such a
+      case you must complete the defun X and then call this function to
+      completely reparse the Elisp-file and rebuild the ECB method buffer!
+
+    * For not semantic supported buffers which can be parsed by imenu or
+      etags (see `ecb-process-non-semantic-files') because for these buffers
+      there is no built-in auto-rebuild mechanism. For these buffers this
+      command calls `ecb-rebuild-methods-buffer-for-non-semantic'.
+
+ - Command: redraw-layout
+   Redraw the ECB screen. If the variable `ecb-redraw-layout-quickly' is not
+   nil then the redraw is done by the `ecb-redraw-layout-quickly' function,
+   otherwise by `ecb-redraw-layout-full'. But it's strongly recommended to
+   use the quick redraw only if you have really slow machines where a full
+   redraw takes several seconds because the quick redraw is not really safe
+   and may have some drawbacks! On normal machines the full drawback should
+   be done in << 1s!
+
+ - Command: restore-default-window-sizes
+   Resets the sizes of the ECB windows to their default values.
+
+ - Command: restore-window-sizes
+   Sets the sizes of the ECB windows to their stored values. See option
+   `ecb-layout-window-sizes' and command `ecb-store-window-sizes'.
+
+ - Command: show-help &optional format
+   Shows the online help of ECB either in Info or in HTML format depending of
+   the value of `ecb-show-help-format'. If called with prefix argument, i.e.
+   if FORMAT is not nil then the user is prompted to choose the format of the
+   help (Info or HTML). If an error about not finding the needed help-file
+   occurs please take a look at the options `ecb-help-info-start-file' and
+   `ecb-help-html-start-file'!
+
+   Note: If you got ECB as a standard XEmacs-package maybe the
+   HTML-online-documentation is not included.
+
+ - Command: show-layout-help
+   Select a name of a layout and shows the documentation of the associated
+   layout-function. At least for the built-in layouts the documentation
+   contains a picture of the outline of the chosen layout.
+
+ - Command: show-tip-of-the-day
+   Show tip of the day if `ecb-tip-of-the-day' is not nil or if called
+   interactively.
+
+ - Command: store-window-sizes &optional fix
+   Stores the sizes of the ECB windows for the current layout. The size of
+   the ECB windows will be set to their stored values when
+   `ecb-redraw-layout' or `ecb-restore-window-sizes' is called.  To reset the
+   window sizes to their default values call
+   `ecb-restore-default-window-sizes'. Please read also the documentation of
+   `ecb-layout-window-sizes'!
+
+   The windows sizes are stored per default as fractions of current
+   frame-width and -height of the ecb-frame, so the stored values will "work"
+   for other frame sizes too. But if FIX is not nil (means called with a
+   prefix argument) then the fixed values of current width and height are
+   stored!
+
+ - Command: submit-problem-report
+   Submit a problem report for the ECB to the ECB mailing-list. This command
+   generates in the edit-window a problem-report which contains already the
+   current values of all ECB options, the current backtrace-buffer if there
+   is any and the current message-buffer. You will be asked for a
+   problem-report subject and then you must insert a description of the
+   problem. Please describe the problem as detailed as possible!
+
+ - Command: toggle-auto-expand-token-tree &optional arg
+   Toggle auto expanding of the ECB-methods-buffer. With prefix argument ARG,
+   make switch on if positive, otherwise switch off. If the effect is that
+   auto-expanding is switched off then the current value of
+   `ecb-auto-expand-token-tree' is saved so it can be used for the next
+   switch on by this command.
+
+ - Command: toggle-compile-window &optional arg
+   Toggle the visibility of the compile-window of ECB. With prefix argument
+   ARG, make visible if positive, otherwise invisible. The height of the
+   compile-window is always the current *saved* (for future sessions) value
+   of `ecb-compile-window-height', i.e. this command can only display a
+   compile-window if `ecb-compile-window-height' has such a saved value of not
+   `nil'!
+
+ - Command: toggle-compile-window-height &optional arg
+   Toggle whether the `ecb-compile-window' is enlarged or not. If ARG > 0
+   then shrink or enlarge the the compile-window according to the value of
+   `ecb-enlarged-compilation-window-max-height'. But never shrink below the
+   value of `ecb-compile-window-height'. If ARG <= 0 then shrink
+   `ecb-compile-window' to `ecb-compile-window-height' and if ARG is nil then
+   toggle the enlarge-state.
+
+ - Command: toggle-ecb-windows &optional arg
+   Toggle visibility of the ECB-windows. With prefix argument ARG, make
+   visible if positive, otherwise invisible. This has nothing to do with
+   (de)activating ECB but only affects the visibility of the ECB windows. ECB
+   minor mode remains active!
+
+ - Command: toggle-layout
+   Toggles between the layouts defined in `ecb-toggle-layout-sequence' (See
+   also option `ecb-show-sources-in-directories-buffer'). Note: This function
+   works by changing the options `ecb-layout-name' but only for current
+   Emacs-session.
+
+ - Command: toggle-window-sync &optional arg
+   Toggle auto synchronizing of the ECB-windows. With prefix argument ARG,
+   switch on if positive, otherwise switch off. If the effect is that
+   auto-synchronizing is switched off then the current value of the option
+   `ecb-window-sync' is saved so it can be used for the next switch on by
+   this command. See also the option `ecb-window-sync'.
+
+ - Command: update-directories-buffer
+   Updates the ECB directories buffer.
+
+ - Command: upgrade-options
+   Check for all ECB-options if their current value is compatible to the
+   defined type. If not upgrade it to the new type or reset it to the
+   default-value of current ECB. Try also to upgrade renamed options.
+   Displays all upgraded or reset options with their old (before the
+   upgrade/reset) and new values.
+
+ - Command: window-sync
+   Synchronizes all special ECB-buffers with current buffer.
+
+   Depending on the contents of current buffer this command performs different
+   synchronizing tasks but only if ECB is active and point stays in an
+   edit-window.
+
+    * If current buffer is a file-buffer then all special ECB-tree-buffers are
+      synchronized with current buffer.
+
+    * If current buffer is a dired-buffer then the directory- and the
+      sources-tree-buffer are synchronized if visible
+
+   In addition to this the hooks in `ecb-current-buffer-sync-hook' run.
+
+Most of these functions are also available via the menu "ECB" and also via
+the ECB key-map with prefix `C-c .' (see `ecb-minor-mode' for a complete list
+of the keybindings).
+
+
+File: ecb.info,  Node: Customizing,  Next: Submitting problem report,  Prev: Usage of ECB,  Up: Top
+
+Customizing ECB
+***************
+
+This chapter describes how to customize ECB for your personal taste.  The
+first section introduces some general aspects (which you should really
+know!), the second one gives an overview of the most important options and
+the third one lists all options of ECB (divided into the customize groups).
+
+* Menu:
+
+* General aspects::             General aspects for customizing ECB
+* Most important options::      Which option you must know
+* Customizable options::        All customizable options of ECB
+
+
+File: ecb.info,  Node: General aspects,  Next: Most important options,  Prev: Customizing,  Up: Customizing
+
+General aspects for customizing ECB
+===================================
+
+The best way to customize all the options of ECB is via the customize-feature
+of (X)Emacs, i.e. means calling the commands `customize-option' or
+`customize-group' etc. This is also the strongly recommended way!
+
+But of course you can also use `setq' or some Elisp-code to change the values
+of many but not all of the options. The values of the following options *MUST
+NOT* be changed via `setq' or Elisp-code but only with the customize-feature!
+
+`ecb-advice-window-functions'           `ecb-bucket-token-display'
+`ecb-compile-window-height'             `ecb-compile-window-temporally-enlarge'
+`ecb-exclude-parents-regexp'            `ecb-font-lock-tokens'
+`ecb-highlight-token-with-point-delay'  `ecb-key-map'
+`ecb-layout-name'                       `ecb-layout-window-sizes'
+`ecb-mode-line-prefixes'                `ecb-show-node-info-in-minibuffer'
+`ecb-show-tokens'                       `ecb-source-path'
+`ecb-token-display-function'            `ecb-tree-RET-selects-edit-window'
+`ecb-type-token-display'                `ecb-windows-height'
+`ecb-window-sync-delay'                 `ecb-windows-width'
+`ecb-use-speedbar-instead-native-tree-buffer'`ecb-toggle-layout-sequence'
+`ecb-mode-line-data'                    `ecb-mode-line-display-window-number'
+`ecb-compile-window-width'              
+
+*IMPORTANT*: If you are the administrator for an Emacs-site, means you are
+responsible for the basic customization of a lot of Emacs users, then you
+maybe need a way to customize Emacs and ECB without changing everyones
+`.emacs'-file and normally you will do this with the file `site-start.el'.
+You can customize all options of ECB in a central `site-start.el' (even the
+options mentioned above!) but you *MUST NOT* do this via `setq' but you have
+to use `custom-set-variables'(1)! Here is a short example how this can be
+done:
+
+   (custom-set-variables '(ecb-show-tokens ((include collapsed nil)
+                                            (parent collapsed nil)
+                                            (type flattened nil)
+                                            (variable collapsed name)
+                                            (function flattened name)
+                                            (rule flattened name)
+                                            (section flattened nil)
+                                            (def collapsed name)
+                                            (t collapsed name)))
+                         '(ecb-font-lock-tokens t)
+                         ;; add here more options of ECB it you want
+                         )
+
+But ensure that you customize the options with the correct lisp format. Read
+carefully the docstrings of the options you want to customize from within
+Elisp-code!
+
+---------- Footnotes ----------
+
+(1) At least for the options for which `setq' is explicitly forbidden, but it
+is recommended to use always `custom-set-variables'!
+
+
+File: ecb.info,  Node: Most important options,  Next: Customizable options,  Prev: General aspects,  Up: Customizing
+
+The most important options of ECB
+=================================
+
+Here are the most important options (it is recommended to check at least the
+following options before working with ECB):
+
+`ecb-source-path'
+   Where ECB can find your sources. You must set this option!
+
+`ecb-show-help-format'
+   Should the online help of ECB be displayed in the standard Info format or
+   in HTML format in a web-browser.
+
+`ecb-auto-activate'
+`ecb-major-modes-activate'
+`ecb-major-modes-deactivate'
+   Auto. (de)activation of ECB
+
+`ecb-key-map'
+   All ECB-keybindings incl. a common prefix-key (*note Using the keyboard::).
+
+`ecb-new-ecb-frame'
+   Should ECB create a new frame at activation time.
+
+`ecb-primary-secondary-mouse-buttons'
+`ecb-primary-mouse-jump-destination'
+   Define how to use the mouse (*note Using the mouse::).
+
+`ecb-tree-expand-symbol-before'
+`ecb-tree-indent'
+   The look&feel of the trees in the tree-buffers. Maybe you like a value of
+   4 for the latter one if you display the expand-symbol before (*note
+   Changing the ECB-layout::).
+
+`ecb-source-file-regexps'
+   Which files will (not) be shown in ECB.
+
+`ecb-show-node-info-in-minibuffer'
+   When and which node-info should be displayed in the minibuffer?
+
+`ecb-layout-name'
+   The ECB layout, means which windows you want to be displayed in the
+   ECB-frame and also the location of these windows (*note Changing the
+   ECB-layout::).
+
+`ecb-token-display-function'
+`ecb-type-token-display'
+`ecb-show-tokens'
+   How to display the entries in the ECB-method window for semantic supported
+   sources (*note Customizing the display::). These options take only effect
+   for semantic-sources (*note Definition of semantic- and
+   non-semantic-sources::).
+
+`ecb-process-non-semantic-files'
+   Displaying file-contents for not by semantic supported files too, e.g.
+   for LaTeX- and perl-sources.
+
+But to make ECB working best for you it is also recommended to have a look at
+*Note Customizable options::!
+
+
+File: ecb.info,  Node: Customizable options,  Prev: Most important options,  Up: Customizing
+
+All customizable options of ECB
+===============================
+
+All customization of ECB is divided into the following "customize groups".
+You can highly customize all the ECB behavior/layout so just go to these
+groups and you will see all well documented ECB-options.
+
+*Please note*: All options in the following subsections are listed without
+the prefix "ecb-" (e.g. the option `ecb-layout-name' is listed with name
+"layout-name"). This has been done for a better readable option index. *Note
+Option Index::.
+
+* Menu:
+
+* ecb-general::                 General customizing ECB
+* ecb-directories::             Customizing the ECB-directories
+* ecb-sources::                 Customizing the ECB-sources
+* ecb-methods::                 Customizing the ECB-methods
+* ecb-history::                 Customizing the ECB-history
+* ecb-layout::                  Customizing the ECB-layout
+* ecb-compilation::             Customizing the compile-window
+* ecb-create-layout::           Customizing options for creating layouts
+* ecb-face-options::            Customizing options for faces
+* ecb-faces::                   Customizing the faces
+* ecb-download::                Customizing how to download ECB
+* ecb-help::                    Customizing the online help of ECB
+* ecb-eshell::                  Customizing the eshell-integration
+* ecb-non-semantic::            Customizing parsing non-semantic sources
+* ecb-winman::                  Customizing window-manager support
+

@@ -1,0 +1,372 @@
+<html lang="en">
+<head>
+<title>ECB - the Emacs Code Browser</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="ECB - the Emacs Code Browser">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="The%20edit-window">The edit-window</a>,
+Next:<a rel=next accesskey=n href="Temp--and-compile-buffers.html#Temp-%20and%20compile-buffers">Temp- and compile-buffers</a>,
+Previous:<a rel=previous accesskey=p href="Using-the-keyboard.html#Using%20the%20keyboard">Using the keyboard</a>,
+Up:<a rel=up accesskey=u href="Usage-of-ECB.html#Usage%20of%20ECB">Usage of ECB</a>
+<hr><br>
+
+<h3>Working with the edit-window</h3>
+
+<p>ECB offers you all what you need to work with the edit-window as if
+the edit-window would be the only window of the ECB-frame.
+
+<p>ECB offers you to advice the following functions so they work best with ECB:
+
+<ul>
+<li><code>other-window</code>
+<li><code>delete-window</code>
+<li><code>delete-other-windows</code>
+<li><code>delete-windows-on</code>
+<li><code>split-window-horizontally</code>
+<li><code>split-window-vertically</code>
+<li><code>split-window</code>
+<li><code>display-buffer</code>
+<li><code>switch-to-buffer</code>
+<li><code>switch-to-buffer-other-window</code>
+<li><code>other-window-for-scrolling</code>
+</ul>
+
+<p>The behavior of the adviced functions is (slightly simplified):
+
+<ul>
+<li>All these adviced functions behaves exactly like their corresponding
+original functions but they always act as if the edit-window(s) of ECB
+would be the only window(s) of the ECB-frame. So the edit-window(s) of
+ECB seems to be a normal Emacs-frame to the user.
+
+<li>If there is a durable compile-window (see <a href="Temp--and-compile-buffers.html#Temp-%20and%20compile-buffers">Temp- and compile-buffers</a>) then all compilation-buffers in the sense of
+<code>ecb-compilation-buffer-p</code> will be displayed in the
+compile-window.
+
+<li>If called in another frame than the ECB-frame these functions behave
+exactly like the not adviced original versions! 
+</ul>
+
+<p>ATTENTION: If you want to work within the edit-window with splitting
+and unsplitting the edit-window(s) it is highly recommended to use the
+adviced-functions of ECB instead of the original Emacs-functions (see
+above). Per default ECB advices all of the functions mentioned
+above but with the option <code>ecb-advice-window-functions</code> you can
+customizes which functions should be adviced by ECB. Please read
+carefully the documentation of this option!
+
+<p>Another interesting option in the context of the edit-window and these
+adviced functions is <code>ecb-layout-always-operate-in-edit-window</code>!
+
+<h4>Documentation of the adviced window functions</h4>
+
+<p>This section describes for every adviced window function (s.a.) how it
+differs from the original version. Only the differences are mentioned,
+so if you want the full documentation of such a function call
+<code>describe-function</code> or <kbd>C-h f</kbd>.
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>other-window</b><i> ARG &amp;optional ALL-FRAMES
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Around-advice <code>ecb</code>: The ECB-version of <code>other-window</code>. 
+Works exactly like the original function with the following
+ECB-adjustment: The behavior depends on
+<code>ecb-other-window-jump-behavior</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>delete-window</b><i> &amp;optional WINDOW
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Around-advice <code>ecb</code>: The ECB-version of <code>delete-window</code>. 
+Works exactly like the original function with the following
+ECB-adjustment:
+
+<p>If optional argument <var>WINDOW</var> is nil (i.e. probably called
+interactively): If called in a splitted edit-window then it works like
+as if the two parts of the splitted edit window would be the only
+windows in the frame. This means the part of the splitted edit-window
+which contains the point will be destroyed and the other part fills
+the whole edit-window. If called in an unsplitted edit-window then
+nothing is done. If called in any other window of the current
+ECB-layout there are two alternatives:
+
+<ul>
+<li>If the function is contained in
+<code>ecb-layout-always-operate-in-edit-window</code> it jumps first in the
+(first) edit-window and does then it´s job.
+
+<li>Otherwise an error is reported. 
+</ul>
+
+<p>If optional argument <var>WINDOW</var> is a live window (i.e. called from
+program): If <var>WINDOW</var> is an edit-window then this window is
+deleted, otherwise an error is reported. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>delete-other-windows</b><i> &amp;optional WINDOW
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Around-advice <code>ecb</code>: The ECB-version of
+<code>delete-other-windows</code>. Works exactly like the original function
+with the following ECB-adjustment:
+
+<p>If optional argument <var>WINDOW</var> is nil (i.e. probably called
+interactively): If called in a splitted edit-window then it works like
+as if the two parts of the splitted edit window would be the only
+windows in the frame. This means the part of the splitted edit-window
+which contains the point fills the whole edit-window.
+
+<ul>
+<li>If called in an unsplitted edit-window then nothing is done.
+
+<li>If called in one of the ecb-windows then the current one is maximized, i.e. 
+the other ecb-windows (not the edit-windows!) are deleted.
+
+<li>If called in the compile window there are two alternatives: If the
+function is contained in
+<code>ecb-layout-always-operate-in-edit-window</code> it jumps first in the
+(first) edit-window and does then it´s job. Otherwise an error is
+reported. 
+</ul>
+
+<p>If optional argument <var>WINDOW</var> is a live window (i.e. called from
+program): If <var>WINDOW</var> is an edit-window then this window is
+maximized (i.e. the other edit-window is deleted), if <var>WINDOW</var> is
+an ecb-window then only the other ecb-windows are deleted and in all
+other cases an error is reported. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>delete-windows-on</b><i> BUFFER &amp;optional FRAME
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Around-advice <code>ecb</code>: The ECB-version of <code>delete-windows-on</code>. 
+Works exactly like the original function with the following
+ECB-adjustment:
+
+<p>An error is reported if <var>BUFFER</var> is an ECB-tree-buffer. These
+windows are not allowed to be deleted. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>split-window</b><i> &amp;optional WINDOW SIZE HORFLAG
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Around-advice <code>ecb</code>: The ECB-version of <code>split-window</code>. The
+meaning of <var>WINDOW</var> must be one of the edit-windows of ECB
+otherwise an error is reported. If the edit-window is already splitted
+then nothing will be done. Besides this (e.g. called for a window in
+another frame than the <code>ecb-frame</code>) it behaves like the original
+version. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>split-window-vertically</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Around-advice <code>ecb</code>: The ECB-version of
+<code>split-window-vertically</code>. Works exactly like the original
+function with the following ECB-adjustment:
+
+<p>Called in an unsplitted edit-window then the edit window will be
+splitted vertically. If called in an already splitted edit-window then
+nothing is done. If called in any other window of the current
+ECB-layout it stops with an error if this function is not contained in
+<code>ecb-layout-always-operate-in-edit-window</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>split-window-horizontally</b><i>
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Around-advice <code>ecb</code>: The ECB-version of
+<code>split-window-horizontally</code>. Works exactly like the original
+function with the following ECB-adjustment:
+
+<p>Called in an unsplitted edit-window then the edit window will be
+splitted horizontally. If called in an already splitted edit-window
+then nothing is done. If called in any other window of the current
+ECB-layout it stops with an error if this function is not contained in
+<code>ecb-layout-always-operate-in-edit-window</code>! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>display-buffer</b><i> BUFFER &amp;optional NOT-THIS-WINDOW FRAME
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Around-advice <code>ecb</code>: Makes this function compatible with ECB if
+called in or for the ecb-frame. It displays all buffers which are
+"compilation-buffers" in the sense of
+<code>ecb-compilation-buffer-p</code> in the compile-window of ECB. If the
+compile-window is temporally hidden then it will be displayed first.
+
+<p>If there is no compile-window (<code>ecb-compile-window-height</code> is
+nil) then it splits the edit-window if unsplitted and displays
+<var>BUFFER</var> in the other edit-window but only if
+<code>pop-up-windows</code> is not nil (otherwise the edit-window will not
+splitted).
+
+<p>If called from outside the edit-area for a non-"compilation-buffers"
+(s.a.) then it behaves as if called from within an edit-window if
+<code>display-buffer</code> is contained in
+<code>ecb-layout-always-operate-in-edit-window</code>: It depends on
+<code>pop-up-windows</code> if the edit-window is automatically splitted ot
+not. If <code>ecb-layout-always-operate-in-edit-window</code> does not
+contain <code>display-buffer</code> then the buffer is displayed in the
+edit-window without splitting it (if unsplitted).
+
+<p>If called for other frames it works like the original version. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>switch-to-buffer</b><i> BUFFER &amp;optional NORECORD
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Around-advice <code>ecb</code>: The ECB-version of <code>switch-to-buffer</code>. 
+Works exactly like the original but with the following enhancements
+for ECB:
+
+<p>"compilation-buffers" in the sense of
+<code>ecb-compilation-buffer-p</code> will be displayed always in the
+compile-window of ECB (if <code>ecb-compile-window-height</code> is not nil)
+- if the compile-window is temporally hidden then it will be displayed
+first. If you do not want this you have to modify the options
+<code>ecb-compilation-buffer-names</code>,
+<code>ecb-compilation-major-modes</code> or
+<code>ecb-compilation-predicates</code>.
+
+<p>If called for non "compilation-buffers" (s.a.) from outside the
+edit-area of ECB it behaves as if called from an edit-window if
+<code>switch-to-buffer</code> is contained in the option
+<code>ecb-layout-always-operate-in-edit-window</code>. Otherwise an error is
+reported. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>switch-to-buffer-other-window</b><i> BUFFER &amp;optional FRAME
+</i></td>
+<td align="right">Command</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Around-advice <code>ecb</code>: The ECB-version of
+<code>switch-to-buffer-other-window</code>. Works exactly like the original
+but with some adaptions for ECB so this function works in a
+"natural" way:
+
+<p>If called in any special ecb-window of the current ECB-layout then it
+goes always to the first edit-window and then goes on as if called
+from this edit-window.
+
+<p>If a compile-window is used (i.e. <code>ecb-compile-window-height</code> is
+not nil) then "compilation-buffers" in the sense of
+<code>ecb-compilation-buffer-p</code> are always displayed in the
+compile-window. If the compile-window is temporally hidden then it
+will be displayed first. If no compile-window is used it behaves like
+the original.
+
+<p>If called from within the compile-window then "compilation-buffers"
+will be displayed still there and all other buffers are displayed in
+one of the edit-windows - if the destination-buffer is already
+displayed in one of the edit-windows then this one is used otherwise
+it behaves like the original.
+
+<p>If called within an edit-window it behaves like the original function
+except for compilation-buffers (if a compile-window is used, see
+above). 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>other-window-for-scrolling</b><i>
+</i></td>
+<td align="right">Function</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Around-advice `ecb': This function determines the window which is
+scrolled if any of the "other-window-scrolling-functions" is called
+(e.g. <code>scroll-other-window</code>). If edit-window is splitted, point
+stays in the "other" edit-window and there is no durable
+compilation-window then always the first edit-window is chosen. 
+</td></tr>
+</table>
+
+</body></html>
+

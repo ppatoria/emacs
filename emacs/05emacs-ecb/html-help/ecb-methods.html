@@ -1,0 +1,676 @@
+<html lang="en">
+<head>
+<title>ECB - the Emacs Code Browser</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="ECB - the Emacs Code Browser">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="ecb-methods">ecb-methods</a>,
+Next:<a rel=next accesskey=n href="ecb-history.html#ecb-history">ecb-history</a>,
+Previous:<a rel=previous accesskey=p href="ecb-sources.html#ecb-sources">ecb-sources</a>,
+Up:<a rel=up accesskey=u href="Customizable-options.html#Customizable%20options">Customizable options</a>
+<hr><br>
+
+<h4>Group ecb-methods</h4>
+
+<p>This group contains the following options:
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>auto-expand-token-tree</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Expand the methods-token-tree automatically if node invisible.
+
+<p>This option has only an effect if option <code>ecb-highlight-token-with-point</code> is
+switched on too. There are three possible choices:
+<ul>
+<li><code>nil</code>:
+No auto. expanding of the method buffer. 
+<li><code>expand-spec</code>:
+Auto expand the method-buffer nodes if the node belonging to current
+token under point is invisible because its parent-node is collapsed. 
+But expanding is only done if the type of the token under point in the
+edit-buffer is contained in <code>ecb-methods-nodes-expand-spec</code>. 
+<li><code>all</code>:
+Like expand-spec but expands all tokens regardless of the setting in
+<code>ecb-methods-nodes-expand-spec</code>. 
+</ul>
+
+<p>This options takes only effect for semantic-sources - means sources
+supported by semantic! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>auto-update-methods-after-save</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Automatically updating the ECB method buffer after saving a source. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>bucket-token-display</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+How ECB displays bucket tokens in the ECB methods buffer. Bucket
+tokens are tokens like "[+] Variables", "[+] Dependencies" etc. The
+name of the bucket-token comes from semantic but you can define a
+prefix, a suffix and a special face for the bucket token.
+
+<p>The default are empty prefix/suffix-strings and
+'ecb-bucket-token-face'. But an alternative can be for example <code>("["
+"]" nil)</code> which means no special face and a display like "[+]
+[&lt;bucket-name&gt;]".
+
+<p>This options takes only effect for semantic-sources - means sources
+supported by semantic! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>exclude-parents-regexp</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Regexp which parent classes should not be shown in the methods buffer
+(see also <code>ecb-show-parents</code>). If nil then all parents will be
+shown if <code>ecb-show-parents</code> is not nil.
+
+<p>This options takes only effect for semantic-sources - means sources
+supported by semantic! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>expand-methods-switch-off-auto-expand</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Switch off auto expanding in the ECB-method buffer. If on then auto
+expanding is switched off after explicit expanding or collapsing by
+<code>ecb-expand-methods-nodes</code>.
+
+<p>This is done with <code>ecb-toggle-auto-expand-token-tree</code> so after
+the switch off the auto expanding feature can again switched on
+quickly.
+
+<p>But after explicitly expanding/collapsing the methods-buffer to a
+certain level the auto. expanding could undo this when the node
+belonging to current token under point in the edit-window is invisible
+after <code>ecb-expand-methods-nodes</code> - then the auto. expand feature
+would make this node immediately visible and destroys the explicitly
+set expand-level. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>font-lock-tokens</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Adds font-locking (means highlighting) to the ECB-method buffer.
+
+<p>This options takes only effect for semantic-sources - means sources
+supported by semantic! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>highlight-token-with-point</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+How to highlight the method or variable under the cursor.
+
+<ul>
+<li><code>highlight-scroll</code>:
+Always scroll the method buffer, so the current method of the
+edit-window is highlighted in the method-window. 
+<li><code>highlight</code>:
+Only highlight the current method of the edit window in the
+method window if the method is visible in the method-window. 
+<li><code>nil</code>:
+No highlighting is done. 
+</ul>
+
+<p>See also <code>ecb-highlight-token-with-point-delay</code>.
+
+<p>This options takes only effect for semantic-sources - means sources
+supported by semantic! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>highlight-token-with-point-delay</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Time Emacs must be idle before current token is highlighted. If nil
+then there is no delay, means current token is highlighted
+immediately. A small value of about 0.25 seconds saves CPU resources
+and you get even though almost the same effect as if you set no delay. 
+But such a delay prevents also "jumping backward/forward" during
+scrolling within java-classes if point goes out of method-definition
+into class-definition. Therefore the default value is a delay of 0.25
+seconds.
+
+<p>This options takes only effect for semantic-sources - means sources
+supported by semantic! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>methods-buffer-after-create-hook</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Local hook running after the creation of the methods-buffer. Every
+function of this hook is called once without arguments direct after
+creating the methods-buffer of ECB and it's local key-map. So for
+example a function could be added which performs calls of
+<code>local-set-key</code> to define new keybindings only for the
+methods-buffer of ECB. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>methods-buffer-name</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Name of the ECB methods buffer. Because it is not a normal buffer for
+editing you should enclose the name with stars, e.g. " *ECB
+Methods*".
+
+<p>If it is necessary for you you can get emacs-lisp access to the
+buffer-object of the ECB-methods-buffer by this name, e.g. by a call
+of <code>set-buffer</code>.
+
+<p>Changes for this option at runtime will take affect only after
+deactivating and then activating ECB again! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>methods-menu-sorter</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Function which re-sorts the menu-entries of the directories buffer.
+
+<p>If a function then this function is called to sort the menu-entries of
+the combined menu-entries of the user-menu-extensions of
+<code>ecb-methods-menu-user-extension</code> and the built-in-menu
+<code>ecb-methods-menu</code>. If nil then no special sorting will be done
+and the user-extensions are placed in front of the built-in-entries.
+
+<p>For the guidelines for such a sorter-function see
+<code>ecb-directories-menu-sorter</code>. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>methods-menu-user-extension</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+User extensions for the popup-menu of the methods buffer.
+
+<p>For further explanations see
+<code>ecb-directories-menu-user-extension</code>.
+
+<p>The node-argument of a menu-function contains as data the
+semantic-token of the method/variable/token for which the popup-menu
+has been opened.
+
+<p>Per default the user-extensions are added at the beginning of the
+built-in menu-entries of <code>ecb-methods-menu</code> but the whole menu can
+be re-arranged with <code>ecb-methods-menu-sorter</code>.
+
+<p>If you change this option you have to restart ECB to take effect. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>methods-nodes-collapse-spec</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Semantic token-types collapsed by <code>ecb-expand-methods-nodes</code>. 
+For valid values of this option see <code>ecb-methods-nodes-expand-spec</code>!
+
+<p>This options takes only effect for semantic-sources - means sources
+supported by semantic! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>methods-nodes-expand-spec</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Semantic token-types expanded by <code>ecb-expand-methods-nodes</code>.
+
+<p>The value of this option is either the symbol <code>all</code> (all tokens
+are expanded regardless of their type) or a list of symbols where each
+symbol is a valid semantic token-type. For a description of semantic
+token types see option <code>ecb-show-tokens</code>.
+
+<p>But this option also defines if bucket-nodes in the ECB-method-buffer (e.g. 
+"[Variables]") should be expanded. Therefore valid symbols for this list
+are also all cars of the variable <code>semantic-symbol-&gt;name-assoc-list</code>.
+
+<p>If there is a bucket-name (the node-name stripped of the settings in
+<code>ecb-bucket-token-display</code>) which is not contained as cdr in
+<code>semantic-symbol-&gt;name-assoc-list</code> then the symbol with this bucket-name as
+name is also a valid symbol for this list. Example: In ECB there are buckets
+"[Parents]". The bucket-name is "Parents" and the valid symbol-name is
+then <code>Parents</code>.
+
+<p>This options takes only effect for semantic-sources - means sources
+supported by semantic! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>post-process-semantic-tokenlist</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Define mode-dependent post-processing for the semantic-tokenlist. This
+is an alist where the car is a major-mode symbol and the cdr is a
+function-symbol of a function which should be used for post-processing
+the tokenlist (returned by <code>semantic-bovinate-toplevel</code>) for a
+buffer in this major-mode. Such a function is called with current
+semantic tokenlist of current buffer and must return a valid tokenlist
+again.
+
+<p>For oo-programming languages where the methods of a class can be
+defined outside the class-definition (e.g. C++, Eieio) the function
+<code>ecb-group-function-tokens-with-parents</code> can be used to get a
+much better method-display in the methods-window of ECB, because all
+method implementations of a class are grouped together.
+
+<p>This options takes only effect for semantic-sources - means sources
+supported by semantic! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>show-only-positioned-tokens</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Show only nodes in the method-buffer which are "jump-able". If not nil
+then ECB displays in the method-buffer only nodes which are
+"jump-able", i.e. after selecting it by clicking or with RET then ECB
+jumps to the corresponding location in the edit-window. Example: With
+CLOS or Eieio source-code there can exist some position-less nodes like
+variable-attributes in a <code>defclass</code> form which are only displayed
+if this option is nil. Displaying such nodes can be senseful even if
+they can not be jumped.
+
+<p>This options takes only effect for semantic-sources - means sources
+supported by semantic! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>show-tokens</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+How to show tokens in the methods buffer first time after find-file. 
+This variable is a list where each element represents a type of
+tokens:
+
+<br><pre>(&lt;token type&gt; &lt;display type&gt; &lt;sort method&gt;)
+</pre>
+
+<p>The tokens in the methods buffer are displayed in the order as they appear in
+this list.
+
+<dl>
+<dt><code>&lt;token type&gt;</code>
+<dd>A Semantic token type symbol (function, variable, rule, include etc.) 
+or one of the following:
+
+<ul>
+<li><code>t</code>: All token types not specified anywhere else in the list. 
+<li><code>parent</code>: The parents of a type. 
+</ul>
+
+<br><dt><code>&lt;display type&gt;</code>
+<dd>A symbol which describes how the tokens of this type shall be shown:
+
+<ul>
+<li><code>expanded</code>: The tokens are shown in an expanded node. 
+<li><code>collapsed</code>: The tokens are shown in a collapsed node. 
+<li><code>flattened</code>: The tokens are added to the parent node. 
+<li><code>hidden</code>: The tokens are not shown. 
+</ul>
+
+<br><dt><code>&lt;sort method&gt;</code>
+<dd>A symbol describing how to sort the tokens of this type:
+
+<ul>
+<li><code>name</code>:
+Sort by the token name. 
+<li><code>access</code>:
+Sort by token access (public, protected, private) and then by name. 
+<li><code>nil</code>:
+Don't sort tokens. They appear in the same order as in the source
+buffer. 
+</ul>
+</dl>
+
+<p>This options takes only effect for semantic-sources - means sources
+supported by semantic! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>token-display-function</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Function to use for displaying tokens in the methods buffer. This
+functionality is set on major-mode base, i.e. for every major-mode a
+different function can be used. The value of this option is a list of
+cons-cells:
+
+<ul>
+<li>The car is either a major-mode symbol or the special symbol 'default which
+means if no function for a certain major-mode is defined then the cdr of
+the 'default cons-cell is used. 
+<li>The cdr is the function used for displaying a token in the related
+major-mode. 
+</ul>
+
+<p>Every function is called with 3 arguments:
+
+<ol type=1 start=1>
+</p><li>The token
+<li>The parent-token of token (can be nil)
+<li>The value of <code>ecb-font-lock-tokens</code>.
+</ol>
+
+<p>Every function must return the display of the token as string,
+colorized if the third argument is not nil.
+
+<p>The following functions are predefined:
+
+<ul>
+<li>All functions of <code>semantic-token-&gt;text-functions</code>.
+
+<li>For every function in <code>semantic-token-&gt;text-functions</code> with name
+"semantic-XYZ" a function with name "ecb-XYC" is predefined. The
+differences between the semantic- and the ECB-version are:
+
+<ul>
+<li>The ECB-version displays for type tokens only the type-name and nothing
+else (exception: In c++-mode a template specifier is appended to the
+type-name if a template instead a normal class). 
+<li>The ECB-version displays type-tokens according to the setting in
+<code>ecb-type-token-display</code>. This is useful for better recognizing
+different classes, structs etc. in the ECB-method window. 
+</ul>
+
+<p>For all tokens which are not types the display of the ECB-version is
+identical to the semantic version. Example: For <code>semantic-name-nonterminal</code>
+the pendant is <code>ecb-name-nonterminal</code>. 
+</ul>
+
+<p>This functionality also allows the user to display tokens as UML. To
+enable this functionality set the function for a major-mode (e.g. 
+<code>jde-mode</code>) to <code>semantic-uml-concise-prototype-nonterminal</code>,
+<code>semantic-uml-prototype-nonterminal</code>, or
+<code>semantic-uml-abbreviate-nonterminal</code> or the ECB-versions of
+these functions.
+
+<p>If the value is <code>nil</code>, i.e. neither a function for a major-mode
+is defined nor the special 'default, then
+<code>semantic-prototype-nonterminal</code> is used for displaying the
+tokens.
+
+<p>This options takes only effect for semantic-sources - means sources
+supported by semantic! 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>token-jump-sets-mark</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Set the mark after jumping to a token from the ECB-method buffer. If
+set the user can easily jump back. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>token-visit-post-actions</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+Actions to perform after visiting a token from the Method-buffer. With
+this option actions can be added which will be performed after
+visiting the start of the token in the source-buffer.
+
+<p>This functionality is set on a <code>major-mode</code> base, i.e. for every
+<code>major-mode</code> a different setting can be used. The value of this
+option is a list of cons-cells:
+<ul>
+<li>The car is either a <code>major-mode</code> symbol or the special symbol
+'default.
+
+<li>The cdr is a list of action-functions or nil. 
+</ul>
+
+<p>ECB first performs all actions defined for the special symbol 'default
+(if any) and then all actions defined for current <code>major-mode</code>
+(if any).
+
+<p>ECB offers some predefined senseful action-functions. Currently there
+are: <code>ecb-token-visit-highlight-token-header</code>
+<code>ecb-token-visit-smart-token-start</code>
+<code>ecb-token-visit-recenter</code> <code>ecb-token-visit-recenter-top</code>
+<code>ecb-token-visit-goto-doc-start</code>
+<code>ecb-token-visit-narrow-token</code> See the documentation of these
+function for details what they do.
+
+<p>But you can add any arbitrary function if the following conditions are
+fulfilled: The function gets the semantic token as argument returns
+the (new) point after finishing its job. 
+</td></tr>
+</table>
+
+<p>
+<table width="100%">
+<tr>
+<td align="left"><b>type-token-display</b><i>
+</i></td>
+<td align="right">User Option</td>
+</tr>
+</table>
+<table width="95%" align="center">
+<tr><td>
+How to display semantic type-tokens in the methods buffer. Normally
+all token displaying, colorizing and facing is done by semantic
+according to the value of <code>semantic-face-alist</code> and the semantic
+display-function (e.g. one from
+<code>semantic-token-&gt;text-functions</code>). But sometimes a finer
+distinction in displaying the different type specifiers of type-tokens
+can be useful. For a description when this option is evaluated look
+at <code>ecb-token-display-function</code>!
+
+<p>This functionality is set on a major-mode base, i.e. for every
+major-mode a different setting can be used. The value of this option
+is a list of cons-cells:
+
+<ul>
+<li>The car is either a major-mode symbol or the special symbol 'default which
+means if no setting for a certain major-mode is defined then the cdr of
+the 'default cons-cell is used.
+
+<li>The cdr is a list of 3-element-lists:
+
+<ol type=1 start=1>
+<li>First entry is a semantic type specifier in string-form. Current
+available type specifiers are for example "class", "interface",
+"struct", "typedef" and "enum". In addition to these ones there
+is also a special ECB type specifier "group" which is related to
+grouping tokens (see <code>ecb-post-process-semantic-tokenlist</code> and
+<code>ecb-group-function-tokens-with-parents</code>). Any arbitrary
+specifier can be set here but if it is not "group" or not known by
+semantic it will be useless. 
+<li>Second entry is a flag which indicates if the type-specifier string
+from (1.) itself should be removed (if there is any) from the display. 
+<li>Third entry is the face which is used in the ECB-method window to
+display type-tokens with this specifier. ECB has some predefined faces
+for this (<code>ecb-type-token-class-face</code>,
+<code>ecb-type-token-struct-face</code>, <code>ecb-type-token-typedef-face</code>,
+<code>ecb-type-token-enum-face</code> and <code>ecb-type-token-group-face</code>)
+but any arbitrary face can be set here. This face is merged with the
+faces semantic already uses to display a token,
+i.e. the result is a display where all face-attributes of the ECB-face
+take effect plus all face-attributes of the semantic-faces which are not
+set in the ECB-face (with XEmacs this merge doesn't work so here the
+ECB-face replaces the semantic-faces; this may be fixed in future
+versions).
+</ol>
+</ul>
+
+<p>The default value is nil means there is no special ECB-displaying of
+type-tokens in addition to the displaying and colorizing semantic
+does. But a value like the following could be a useful setting:
+
+<br><pre>((default
+   ("class" t ecb-type-token-class-face)
+   ("group" nil ecb-type-token-group-face))
+ (c-mode
+  ("struct" nil ecb-type-token-struct-face)
+  ("typedef" nil ecb-type-token-typedef-face)))
+</pre>
+
+<p>This means that in <code>c-mode</code> only "struct"s and "typedef"s are
+displayed with special faces (the specifiers itself are not removed)
+and in all other modes "class"s and grouping-tokens (see
+<code>ecb-token-display-function</code>,
+<code>ecb-group-function-tokens-with-parents</code>) have special faces and
+the "class" specifier-string is removed from the display.
+
+<p>This options takes only effect for semantic-sources - means sources
+supported by semantic! 
+</td></tr>
+</table>
+
+</body></html>
+

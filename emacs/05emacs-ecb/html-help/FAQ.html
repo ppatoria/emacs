@@ -1,0 +1,301 @@
+<html lang="en">
+<head>
+<title>ECB - the Emacs Code Browser</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name=description content="ECB - the Emacs Code Browser">
+<meta name=generator content="makeinfo 4.2">
+<link href="http://www.gnu.org/software/texinfo/" rel=generator-home>
+</head>
+<body>
+<p>
+Node:<a name="FAQ">FAQ</a>,
+Next:<a rel=next accesskey=n href="Command-Index.html#Command%20Index">Command Index</a>,
+Previous:<a rel=previous accesskey=p href="Conflicts-and-bugs.html#Conflicts%20and%20bugs">Conflicts and bugs</a>,
+Up:<a rel=up accesskey=u href="ecb.html#Top">Top</a>
+<hr><br>
+
+<h2>Frequently asked questions</h2>
+
+<p>This is the Emacs Code Browser FAQ.
+
+<p><table>
+<tr align="left"><td valign="top"><strong>Question</strong>
+</td><td valign="top"></td><td valign="top">
+<strong>Answer</strong>
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">What is the first step i should do if i have problems with ECB? 
+</td><td valign="top"></td><td valign="top">
+Read carefully the related sections of the online-help of ECB.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">What should i do, if a have a problem which can not be solved even
+after reading the online-help? 
+</td><td valign="top"></td><td valign="top">
+Send a problem-report to the ECB-mailing-list with the command
+<code>ecb-submit-problem-report</code>. 
+See <a href="Submitting-problem-report.html#Submitting%20problem%20report">Submitting problem report</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">What should i do, if another package seems not to work correct with
+ECB? 
+</td><td valign="top"></td><td valign="top">
+Take a look into <a href="Conflicts.html#Conflicts">Conflicts</a>. If your package is not listed there
+then submit a problem-report.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Can ECB parse and display source-contents not supported by semantic? 
+</td><td valign="top"></td><td valign="top">
+Yes, in all version &gt;= 1.94. ECB can now parse and display all
+source-contents supported by semantic, imenu or etags - same as
+speedbar. See <a href="Non-semantic-sources.html#Non-semantic%20sources">Non-semantic sources</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Why are the lines in the ECB-, temp- and compilation-buffers not
+wrapped but truncated? 
+</td><td valign="top"></td><td valign="top">
+Check the variable <code>truncate-partial-width-windows</code> and set it to
+nil.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Why doesn't ECB work correct with VC? 
+</td><td valign="top"></td><td valign="top">
+The variable <code>vc-delete-logbuf-window</code> must be set to nil during
+active ECB. This can be done with the hooks of ECB.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Does ECB support C++ as well as Java? 
+</td><td valign="top"></td><td valign="top">
+This depends strongly on the used semantic-version, but all
+semantic-versions &gt;= semantic-1.4.3 support C++ really well.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Does ECB support Perl? 
+</td><td valign="top"></td><td valign="top">
+This depends completely on semantic. If there is a semantic-BNF for
+Perl then semantic can parse Perl and then in turn ECB supports Perl. 
+Check semantic if Perl is supported or write your own Perl-BNF for
+semantic.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Does ECB support language XYZ? 
+</td><td valign="top"></td><td valign="top">
+See question "Does ECB support Perl?" and replace "Perl" with
+"XYZ" in the answer.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">How to add new languages to ECB? 
+</td><td valign="top"></td><td valign="top">
+Add the language XYZ to semantic (perform all necessary steps described in
+the semantic-manual) and ECB will automatically support language XYZ! 
+There is nothing to do in ECB itself!
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Why does ECB not recognize my source-files for C++? 
+</td><td valign="top"></td><td valign="top">
+Your C++-files have probably an extension which is not mapped to
+c++-mode in <code>auto-mode-alist</code> and/or your own Emacs-setup has
+"destroyed" the correct value of the hook-variable
+<code>c++-mode-hook</code>. 
+See <a href="Setting-up-Emacs.html#Setting%20up%20Emacs">Setting up Emacs</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Why doesn't ECB display the node name in the echo area if mouse moves
+over it? 
+</td><td valign="top"></td><td valign="top">
+There can be several reasons: First the value of the option
+<code>ecb-show-node-name-in-minibuffer</code> must be either <code>always</code> or
+<code>if-too-long</code>. If this is OK, then maybe you have turned on
+follow-mouse AFTER activating ECB; follow-mouse must be turned on
+BEFORE ECB is activated, e.g. in the <code>ecb-activate-hook</code>! But with
+Emacs 21.X and XEmacs there are no problems with this feature, just
+activate it.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">What is the reason for poor scrolling performance with GNU Emacs 20.X
+in the edit-windows and what can i do? 
+</td><td valign="top"></td><td valign="top">
+Set <code>scroll-conservatively</code> to 0 and <code>scroll-step</code> to a
+value &gt; 1. For the exact reason look at
+<a href="Optimize-scrolling.html#Optimize%20scrolling">Optimize scrolling</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Is it possible to make the history of ECB persistent? 
+</td><td valign="top"></td><td valign="top">
+You can use the library "desktop.el" which works very well with ECB. 
+Then all files of your recent Emacs-session will be opened
+automatically after next Emacs-start and will be added automatically
+to the ECB-history after ECB-start.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Is there an "Intellisense"-mechanism like with other IDEs? 
+</td><td valign="top"></td><td valign="top">
+For Java the JDEE<a rel=footnote href="#fn-1"><sup>1</sup></a> has this feature and for all other languages
+semantic offer something similar, see
+<a href="http://cedet.sourceforge.net/intellisense.shtml">http://cedet.sourceforge.net/intellisense.shtml</a>
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Can i use ECB in combination with Gnus within one frame? 
+</td><td valign="top"></td><td valign="top">
+You can, but for ECB-versions &lt; 1.96 it is not recommended because
+each of them has it's own window-management and probably there will be
+conflicts, so use different frames for ECB and Gnus! But beginning
+with ECB 1.96 you can use either escreen.el or winring.el as
+"window-manager" which allows you in consequence to use ECB and
+applications like Gnus in one frame! 
+See <a href="Window-managers-and-ECB.html#Window-managers%20and%20ECB">Window-managers and ECB</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Can i speed up displaying the contents of big-size directories? 
+</td><td valign="top"></td><td valign="top">
+Yes, see the option <code>ecb-cache-directory-contents</code>. Read the
+section
+<a href="Large-directories.html#Large%20directories">Large directories</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Is it possible to create/use other layouts than the built-in ones? 
+</td><td valign="top"></td><td valign="top">
+Yes. <a href="Creating-a-new-ECB-layout.html#Creating%20a%20new%20ECB-layout">Creating a new ECB-layout</a> and
+<a href="The-layout-engine.html#The%20layout-engine">The layout-engine</a> are the relevant sections. The former one
+describes how to create interactively new layouts where the latter
+one is for Elisp-programmers.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Can i use speedbar as directory-browser within ECB? 
+</td><td valign="top"></td><td valign="top">
+Yes, see <a href="Integrating-speedbar.html#Integrating%20speedbar">Integrating speedbar</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Can i exclude subdirectories from the recursive grep in the directories buffer? 
+</td><td valign="top"></td><td valign="top">
+Yes, see <a href="Grepping-directories.html#Grepping%20directories">Grepping directories</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">How can i prevent contaminating each directory with a file <code>semantic-cache</code>? 
+</td><td valign="top"></td><td valign="top">
+Set <code>semanticdb-default-save-directory</code> to a directory.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Why ECB displays large portions of current source-file with dark background? 
+</td><td valign="top"></td><td valign="top">
+This comes from semantic;
+see <a href="Setting-up-Emacs.html#Setting%20up%20Emacs">Setting up Emacs</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Why ECB underlines some parts of current source-file? 
+</td><td valign="top"></td><td valign="top">
+This comes from semantic;
+see <a href="Setting-up-Emacs.html#Setting%20up%20Emacs">Setting up Emacs</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Can i add my own commands to the popup-menus of tree-buffers? 
+</td><td valign="top"></td><td valign="top">
+Yes, see <a href="Using-the-mouse.html#Using%20the%20mouse">Using the mouse</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Can ECB display the compile-window "on demand"? 
+</td><td valign="top"></td><td valign="top">
+Yes, see <a href="Tips-and-tricks.html#Tips%20and%20tricks">Tips and tricks</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Which buffers are treated as compilation-buffers by ECB? 
+</td><td valign="top"></td><td valign="top">
+See the docstring of the function <code>ecb-compilation-buffer-p</code>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">How can i change the modeline of an ECB-tree-buffer? 
+</td><td valign="top"></td><td valign="top">
+You can change it with the options <code>ecb-mode-line-prefixes</code>,
+<code>ecb-mode-line-data</code> and
+<code>ecb-mode-line-display-window-number</code>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">How can i change the keybindings of ECB? 
+</td><td valign="top"></td><td valign="top">
+You can do this with option <code>ecb-key-map</code> (see <a href="ecb-general.html#ecb-general">ecb-general</a>).
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">What can i do if hiding/showing from the methods-buffer does not work? 
+</td><td valign="top"></td><td valign="top">
+Either the current <code>major-modes</code> is not supported by hideshow or
+you have to add an entry to <code>hs-special-modes-alist</code>
+(see <a href="Hide-show.html#Hide-show">Hide-show</a>).
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Can i maximize one of the ECB-windows for better overlook? 
+</td><td valign="top"></td><td valign="top">
+Yes, see <a href="Maximizing-the-ECB-windows.html#Maximizing%20the%20ECB%20windows">Maximizing the ECB windows</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Can i hide the ECB-windows for getting more editing-space? 
+</td><td valign="top"></td><td valign="top">
+Yes, see <a href="Hiding-the-ECB-windows.html#Hiding%20the%20ECB%20windows">Hiding the ECB windows</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Can i define the actions ECB performs after visiting a token? 
+</td><td valign="top"></td><td valign="top">
+Yes, see <a href="Visiting-tokens.html#Visiting%20tokens">Visiting tokens</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Buffers are not displayed correctly in the compile-window? 
+</td><td valign="top"></td><td valign="top">
+See <a href="Problems-with-the-compile-window.html#Problems%20with%20the%20compile%20window">Problems with the compile window</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Can ECB work together with window-managers like escreen.el? 
+</td><td valign="top"></td><td valign="top">
+Yes, see <a href="Window-managers-and-ECB.html#Window-managers%20and%20ECB">Window-managers and ECB</a>.
+
+<br></td></tr><tr align="left"><td valign="top"></td><td valign="top"></td><td valign="top">
+
+<br></td></tr><tr align="left"><td valign="top">Can ECB display the window-number in the modeline of the special windows? 
+</td><td valign="top"></td><td valign="top">
+Yes, see option <code>ecb-mode-line-display-window-number</code>.
+
+<br></td></tr></table>
+
+<hr><h4>Footnotes</h4>
+<ol type="1">
+<li><a name="fn-1"></a>
+<p>
+<a href="http://jdee.sunsite.dk/">http://jdee.sunsite.dk/</a>
+</p>
+
+</ol><hr>
+
+</body></html>
+
